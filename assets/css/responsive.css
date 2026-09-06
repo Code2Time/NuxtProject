@@ -1,0 +1,240 @@
+html, body {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+}
+
+@media (max-width: 1200px) {
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 16px;
+    }
+
+    .similar-products .products-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .header-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .search-bar {
+        max-width: 100%;
+        min-width: 100%;
+    }
+
+    .header-actions {
+        justify-content: center;
+    }
+
+    .slider-box {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 30px 25px !important;
+        min-height: 200px !important;
+        border-radius: 16px !important;
+    }
+
+    .slide-content h2 {
+        font-size: 26px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .slide-content p {
+        font-size: 15px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .btn-primary {
+        padding: 10px 24px !important;
+        font-size: 14px !important;
+    }
+
+    .slide-image {
+        margin-top: 16px !important;
+        margin-right: 0 !important;
+    }
+
+    .slide-image i {
+        font-size: 60px !important;
+    }
+
+    .cart-wrapper,
+    .detail-wrapper {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-grid,
+    .similar-products .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px;
+    }
+
+    .menu-toggle {
+        display: block !important;
+        order: 0 !important;
+        padding: 6px 8px !important;
+        font-size: 20px !important;
+    }
+
+    .logo {
+        order: 1 !important;
+        flex: 1;
+    }
+
+    .logo a {
+        font-size: 20px !important;
+    }
+
+    .header-actions {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 4px !important;
+        flex-wrap: nowrap !important;
+        order: 2 !important;
+    }
+
+    .header-actions a {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
+        min-height: 36px !important;
+        min-width: 36px !important;
+    }
+
+    .login-btn span {
+        display: none !important;
+    }
+
+    .login-btn,
+    .cart-btn,
+    .wishlist-header-btn {
+        padding: 6px 10px !important;
+        font-size: 14px !important;
+    }
+
+    .search-bar {
+        order: 3 !important;
+        flex-basis: 100%;
+        margin-top: 8px;
+        min-width: 100%;
+    }
+
+    .header-wrapper {
+        flex-wrap: wrap;
+    }
+
+    .glass-card {
+        padding: 20px 16px !important;
+    }
+
+    .circle-1 {
+        width: 180px !important;
+        height: 180px !important;
+    }
+
+    .circle-2 {
+        width: 240px !important;
+        height: 240px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px;
+    }
+
+    .glass-card {
+        padding: 16px 12px !important;
+        border-radius: 16px !important;
+    }
+
+    .form-title {
+        font-size: 1.3rem !important;
+    }
+
+    .form-subtitle {
+        font-size: 0.8rem !important;
+        margin-bottom: 16px !important;
+    }
+
+    .custom-tabs {
+        margin-bottom: 16px !important;
+    }
+
+    .custom-tab-text {
+        font-size: 0.95rem !important;
+    }
+
+    .glass-input ::v-deep input {
+        font-size: 0.9rem !important;
+    }
+
+    .custom-btn {
+        font-size: 1.1rem !important;
+    }
+
+    .glass-alert-error,
+    .glass-alert-success {
+        font-size: 0.85rem !important;
+        padding: 8px 12px !important;
+    }
+
+    .circle-1 {
+        width: 130px !important;
+        height: 130px !important;
+        top: 3% !important;
+        right: 3% !important;
+    }
+
+    .circle-2 {
+        width: 180px !important;
+        height: 180px !important;
+        bottom: 2% !important;
+        left: 3% !important;
+    }
+
+    .circle-3 {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid,
+    .similar-products .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px;
+    }
+
+    .glass-card {
+        padding: 14px 10px !important;
+    }
+
+    .form-title {
+        font-size: 1.15rem !important;
+    }
+
+    .form-subtitle {
+        font-size: 0.75rem !important;
+    }
+
+    .custom-btn {
+        font-size: 1rem !important;
+    }
+}
