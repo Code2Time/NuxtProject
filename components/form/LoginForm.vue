@@ -6,8 +6,8 @@
             label="شماره موبایل" 
             placeholder="۰۹۱۲۳۴۵۶۷۸۹" 
             rules="required, phone" 
-            type="tel" 
             v-model="credentials.phone"
+            type="tel" 
         />
 
         <BaseInput 
@@ -15,12 +15,11 @@
             c-class="mb-2" 
             label="رمز عبور" 
             rules="required" 
-            type="password" 
             v-model="credentials.password"
+            type="password" 
         />
 
-        <!-- استفاده از errorMessage یا error پیام ورودی -->
-        <BaseAlert :message="errorMessage || error" type="error" />
+        <!-- <BaseAlert :message="errorMessage || error" type="error" /> -->
 
         <BaseButton :disabled="!valid" :loading="loading" class="mt-4" type="submit">
             ورود
@@ -30,14 +29,14 @@
 
 <script>
 import BaseInput from '~/components/base/BaseInput.vue';
-import BaseAlert from '~/components/base/BaseAlert.vue';
+// import BaseAlert from '~/components/base/BaseAlert.vue';
 import BaseButton from '~/components/base/BaseButton.vue';
 
 export default {
     name: 'LoginForm',
     components: { 
         BaseInput, 
-        BaseAlert, 
+        // BaseAlert, 
         BaseButton 
     },
     
@@ -55,23 +54,17 @@ export default {
     data() {
         return {
             valid: true,
-            errorMessage: '', // متغیر داخلی برای ذخیره خطای لاگین
+            errorMessage: '',
             credentials: { phone: '', password: '' }
         }
     },
 
     methods: {
-        async handleLogin() {
-            this.errorMessage = ''; // پاک‌سازی خطای قبلی هنگام تلاش مجدد
+        handleLogin() {
+            this.errorMessage = '';
             
             if (this.$refs.loginForm && this.$refs.loginForm.validate()) {
-                try {
-                    await this.$store.dispatch('auth/login', { ...this.credentials });
-                    this.$router.push('/');
-                } catch (err) {
-                    // ذخیره پیغام خطا جهت نمایش در BaseAlert
-                    this.errorMessage = err.message || 'خطا در ورود به سیستم';
-                }
+                this.$emit('submit', { ...this.credentials });
             }
         }
     }
