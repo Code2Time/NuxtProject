@@ -69,9 +69,22 @@
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.08) !important;
+    background: rgba(15, 23, 42, 0.85) !important;
     backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(59, 130, 246, 0.5) !important;
+    transform: translateY(-4px);
+}
+
+.v-card--title, .v-card--text,
+p, span, h1, h2, h3, h4, h5, h6{
+    color: #f8fafc !important;    
 }
 
 .border-bottom-glass {
@@ -99,4 +112,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.Vue-Toastification__toast-body {
+    direction: rtl !important;
+    text-align: right !important;
+    font-family: inherit !important;
 }

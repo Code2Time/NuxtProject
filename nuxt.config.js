@@ -27,7 +27,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/validators.js'
+    '~/plugins/validators.js',
+    {src: '~/plugins/toast.js', mode: 'client'}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -68,6 +69,7 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
+    rtl: true,
     customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: true,
@@ -87,5 +89,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend(config) {
+            config.resolve.alias['vue$'] = 'vue/dist/vue.runtime.esm.js'
+        }
   }
 }

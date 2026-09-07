@@ -1,11 +1,5 @@
 <template>
     <v-container fluid fill-height class="animated-bg ma-0 pa-0 overflow-hidden rtl-dir">
-        <div class="bg-circles">
-            <div class="circle circle-1"></div>
-            <div class="circle circle-2"></div>
-            <div class="circle circle-3"></div>
-        </div>
-
         <v-row align="center" justify="center" class="z-index-above fill-height my-0">
             <v-col cols="12" sm="10" md="6" lg="4" xl="3" class="pa-4">
                 <v-card class="glass-card pa-5 pa-sm-8 pa-md-8 rounded-xl elevation-0 text-center">
@@ -14,26 +8,23 @@
 
                     <v-tabs v-model="tab" background-color="transparent" dark grow class="mb-6 custom-tabs">
                         <v-tab class="custom-tab-text">ورود</v-tab>
-                        <v-tab class="custom-tab-text">ثبت نام</v-tab>
+                        <!-- <v-tab class="custom-tab-text">ثبت نام</v-tab> -->
                     </v-tabs>
 
                     <v-tabs-items v-model="tab" class="transparent-tabs">
                         <v-tab-item>
                             <LoginForm
                                 :loading="loading"
-                                :error="loginError"
                                 @submit="handleLogin"
                             />
                         </v-tab-item>
 
-                        <v-tab-item>
+                        <!-- <v-tab-item>
                             <SignupForm
                                 :loading="loading"
-                                :error="registerError"
-                                :success="registerSuccess"
                                 @submit="handleRegister"
                             />
-                        </v-tab-item>
+                        </v-tab-item> -->
                     </v-tabs-items>
                 </v-card>
             </v-col>
@@ -43,140 +34,72 @@
 
 <script>
 import LoginForm from '~/components/form/LoginForm.vue';
-import SignupForm from '~/components/form/SignupForm.vue';
+// import SignupForm from '~/components/form/SignupForm.vue';
 
 export default {
-    layout: 'empty',
-    
+    name: 'LoginPage',
     components: {
         LoginForm,
-        SignupForm
+        // SignupForm
     },
+
+    layout: 'empty',
 
     data() {
         return {
             tab: 0,
-            loading: false,
-            loginError: '',
-            registerError: '',
-            registerSuccess: ''
+            loading: false
         }
     },
 
     methods: {
-        async handleLogin(credentials) {
+        handleLogin(credentials) {
             this.loading = true;
-            this.loginError = '';
 
-            try {
-                await this.$store.dispatch('auth/login', credentials);
-                this.$router.push('/');
-            } catch (error) {
-                this.loginError = error.message || 'خطا در ورود به سیستم';
-            } finally {
+            setTimeout(() => {
+                const isValidUser = credentials.phone === '09111111111' && credentials.password === '12345678';
+
+                if (isValidUser) {
+                    if (typeof window !== 'undefined') {
+                        localStorage.setItem('isLoggedIn', 'true');
+                        this.$root.$emit('user-auth-changed');
+                    }
+
+                    if (this.$toast) {
+                        this.$toast.success('ورود با موفقیت انجام شد!');
+                    }
+
+                    this.$router.push('/products');
+                } else if (this.$toast) {
+                    this.$toast.error('شماره موبایل یا رمز عبور اشتباه است.');
+                }
+
                 this.loading = false;
-            }
+            }, 500);
         },
 
-        async handleRegister(credentials) {
+        handleRegister(credentials) {
             this.loading = true;
-            this.registerError = '';
-            this.registerSuccess = '';
 
-            try {
-                await this.$store.dispatch('auth/register', credentials);
-                this.registerSuccess = 'حساب کاربری با موفقیت ساخته شد! در حال انتقال به صفحه ورود...';
+            setTimeout(() => {
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    this.$root.$emit('user-auth-changed');
+                }
 
-                setTimeout(() => {
-                    this.tab = 0;
-                    this.registerSuccess = '';
-                }, 1500);
-            } catch (error) {
-                this.registerError = error.message || 'خطا در ثبت نام. لطفاً مجدداً تلاش کنید.';
-            } finally {
+                if (this.$toast) {
+                    this.$toast.success('حساب کاربری با موفقیت ساخته شد!');
+                }
+
                 this.loading = false;
-            }
+                this.$router.push('/products');
+            }, 500);
         }
     }
 }
 </script>
 
 <style scoped>
-.rtl-dir {
-    direction: rtl;
-    text-align: right;
-    font-family: 'Sahel', sans-serif !important;
-}
-
-.animated-bg {
-    background: linear-gradient(135deg, #2b1055 0%, #7597de 50%, #d8682e 100%);
-    position: relative;
-    min-height: 100vh;
-    width: 100vw !important;
-}
-
-.z-index-above {
-    position: relative;
-    z-index: 2;
-}
-
-.bg-circles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.circle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(5px);
-    animation: float 8s infinite ease-in-out;
-}
-
-.circle-1 {
-    width: 250px;
-    height: 250px;
-    top: 10%;
-    right: 15%;
-    animation-delay: 0s;
-}
-
-.circle-2 {
-    width: 350px;
-    height: 350px;
-    bottom: 5%;
-    left: 10%;
-    animation-delay: -3s;
-    background: rgba(216, 104, 46, 0.25);
-}
-
-.circle-3 {
-    width: 150px;
-    height: 150px;
-    top: 60%;
-    right: 5%;
-    animation-delay: -5s;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-30px) scale(1.05); }
-}
-
-.glass-card {
-    background: rgba(255, 255, 255, 0.08) !important;
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    box-shadow: none !important;
-    width: 100%;
-}
-
 .form-title {
     font-family: 'Sahel', sans-serif !important;
     font-size: 1.6rem !important;
