@@ -71,3 +71,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+::v-deep input {
+  text-align: left !important;
+  direction: ltr !important;
+}
+</style>

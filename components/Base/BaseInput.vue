@@ -1,5 +1,6 @@
 <template>
     <v-text-field
+        :dir="dir"
         :value="value"
         :type="computedType"
         :label="label"
@@ -41,6 +42,12 @@ export default {
     inheritAttrs: false,
 
     props: {
+
+        dir: {
+            type: String,
+            default: 'rtl'
+        },
+
         value: { 
             type: [String, Number], 
             default: '' 
@@ -253,8 +260,8 @@ export default {
     color: #ffffff !important;
     font-size: 1.1rem !important;
     font-weight: 600 !important;
-    direction: rtl !important;
-    text-align: right !important;
+    direction: inherit;
+    text-align: inherit;
 }
 
 .glass-input ::v-deep .v-label {
@@ -278,8 +285,8 @@ export default {
 }
 
 .glass-input ::v-deep input::placeholder {
-    direction: rtl !important;
-    text-align: right !important;
+    direction: inherit;
+    text-align: inherit;
 }
 
 .glass-input ::v-deep .v-text-field__details,
