@@ -55,25 +55,22 @@ export default {
     methods: {
         handleLogin(credentials) {
             this.loading = true;
-
             const isValidUser = credentials.phone === '09111111111' && credentials.password === '12345678';
 
             if (isValidUser) {
-                if (typeof window !== 'undefined') {
+                if (process.client) {
                     localStorage.setItem('isLoggedIn', 'true');
                 }
 
+                this.$store.commit('SET_LOGIN_STATUS', true);
+
                 this.$toast.success('ورود با موفقیت انجام شد!');
-                this.$store.commit('SET_LOGIN_STATUS', true)
 
                 const redirectPath = this.$route.query.redirect || '/products';
-
-                this.$router.push(redirectPath).then(() => {
-                    this.$root.$emit('user-auth-changed');
-                });
-                } else {
+                this.$router.push(redirectPath);
+            } else {
                 this.$toast.error('شماره موبایل یا رمز عبور اشتباه است.');
-                }
+            }
 
             this.loading = false;
         },

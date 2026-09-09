@@ -20,8 +20,6 @@
             type="password" 
         />
 
-        <!-- <BaseAlert :message="errorMessage || error" type="error" /> -->
-
         <BaseButton :disabled="!valid" :loading="loading" class="mt-4" type="submit">
             ورود
         </BaseButton>
@@ -30,14 +28,12 @@
 
 <script>
 import BaseInput from '~/components/Base/BaseInput.vue';
-// import BaseAlert from '~/components/Base/BaseAlert.vue';
 import BaseButton from '~/components/Base/BaseButton.vue';
 
 export default {
     name: 'LoginForm',
     components: { 
         BaseInput, 
-        // BaseAlert, 
         BaseButton 
     },
     
@@ -45,17 +41,12 @@ export default {
         loading: { 
             type: Boolean, 
             default: false 
-        },
-        error: { 
-            type: String, 
-            default: '' 
         }
     },
 
     data() {
         return {
             valid: true,
-            errorMessage: '',
             credentials: { phone: '', password: '' }
         }
     },
@@ -71,3 +62,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+::v-deep input {
+  text-align: left !important;
+  direction: ltr !important;
+}
+</style>

@@ -7,7 +7,9 @@
                     <span class="font-weight-bold white--text text-h6 no-glow">پنل مدیریت</span>
                 </div>
 
-                <NavLinks :is-logged-in="isLoggedIn" />
+                <div class="d-none d-md-flex align-center">
+                    <NavLinks :is-logged-in="isLoggedIn" />
+                </div>
 
                 <div class="d-flex align-center">
                     <div class="d-none d-md-flex align-center">
@@ -36,7 +38,7 @@
             class="glass-drawer no-glow"
         >
             <v-list class="pt-4" style="direction: rtl;">
-                <NavLinks :is-logged-in="isLoggedIn" :is-mobile="true" />
+                <NavLinks :is-logged-in="isLoggedIn" />
 
                 <v-divider class="my-4 rgba-white-divider"></v-divider>
 
@@ -61,43 +63,22 @@ export default {
 
     data() {
         return {
-            isLoggedIn: false,
             drawer: false
         }
     },
 
-    watch: {
-        $route: {
-            handler() {
-                this.checkLoginStatus();
-                this.drawer = false;
-            },
-            immediate: true
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.isLoggedIn;
         }
     },
 
-    mounted() {
-        this.checkLoginStatus();
-        this.$root.$on('user-auth-changed', this.checkLoginStatus);
-    },
-
-    beforeDestroy() {
-        this.$root.$off('user-auth-changed', this.checkLoginStatus);
-    },
-
     methods: {
-        checkLoginStatus() {
-            if (process.client) {
-                this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            }
-        },
-
         handleLogout() {
             if (process.client) {
                 localStorage.removeItem('isLoggedIn');
-                this.isLoggedIn = false;
+                this.$store.commit('SET_LOGIN_STATUS', false);
                 this.drawer = false;
-                this.$root.$emit('user-auth-changed');
                 this.$toast.info('از حساب کاربری خارج شدید');                
                 this.$router.push('/products');
             }
@@ -107,42 +88,7 @@ export default {
 </script>
 
 <style scoped>
-.glass-header {
-    background-color: rgba(15, 23, 42, 0.85) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-.glass-drawer {
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
 .w-100 {
     width: 100% !important;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.rgba-white-divider {
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.no-glow,
-.no-glow *,
-.no-glow::before,
-.no-glow::after {
-    text-shadow: none !important;
-    box-shadow: none !important;
-    filter: none !important;
-    drop-shadow: none !important;
-}
-
-.v-btn::before {
-    background-color: transparent !important;
 }
 </style>

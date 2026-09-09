@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 class="white--text font-weight-bold mb-6 text-h4">
-        <v-icon color="#3B82F6" large class="ml-2">mdi-store</v-icon>
+            <v-icon color="#3B82F6" large class="ml-2">mdi-store</v-icon>
             فروشگاه محصولات
         </h1>
 
@@ -27,11 +27,11 @@
                             </v-avatar>
                         </div>
 
-                        <h2 class="white--text text-h6 font-weight-bold text-center mb-3">
+                        <h2 class="white--text text-h6 font-weight-bold text-center mb-3 text-truncate">
                             {{ product.name || product.title }}
                         </h2>
 
-                        <p class="white--text text-body-2 text-center line-height-relaxed product-desc">
+                        <p class="white--text text-body-2 text-center product-desc">
                             {{ product.description }}
                         </p>
                     </div>
@@ -41,10 +41,11 @@
                             :to="`/products/${product.id}`"
                             block
                             color="#3B82F6"
-                            class="white--text font-weight-bold py-5 rounded-lg no-glow"
+                            elevation="0"
+                            class="white--text font-weight-bold py-5 rounded-lg"
                             :ripple="false"
                         >
-                        مشاهده محصول
+                            مشاهده محصول
                         </v-btn>
                     </div>
                 </v-card>
@@ -68,19 +69,15 @@ export default {
 </script>
 
 <style scoped>
-.line-height-relaxed {
-line-height: 1.8 !important;
-}
-
-.product-desc {
-    min-height: 60px;
-}
-
 .w-100 {
     width: 100% !important;
 }
 
-.no-glow {
-    box-shadow: none !important;
+.product-desc {
+    line-height: 1.8 !important;
+    min-height: 4.8em;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 </style>

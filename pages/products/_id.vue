@@ -4,7 +4,7 @@
             <v-col cols="12" md="8">
                 <v-card class="glass-card pa-6 pa-md-8 rounded-xl elevation-0">
                     <v-btn text color="primary" class="mb-4" to="/products">
-                        <v-icon right>mdi-arrow-right</v-icon>
+                        <v-icon right class="ml-1">mdi-arrow-right</v-icon>
                         بازگشت به فروشگاه
                     </v-btn>
 
@@ -18,22 +18,22 @@
                                 <h1 class="text-h4 font-weight-bold white--text mb-1">
                                     {{ product.name }}
                                 </h1>
-                                <v-chip color="blue-grey lighten-2" dark small label>
+                                <v-chip color="primary" label small class="font-weight-bold">
                                     {{ product.category }}
                                 </v-chip>
                             </div>
                         </div>
 
-                        <v-divider class="mb-6 rgb-white-divider" />
+                        <v-divider dark class="mb-6" />
 
                         <div class="mb-6">
                             <h3 class="text-h6 white--text mb-2">توضیحات محصول</h3>
-                            <p class="grey--text text--lighten-2 text-body-1 style-description">
+                            <p class="grey--text text--lighten-2 text-body-1 text-justify">
                                 {{ product.description }}
                             </p>
                         </div>
 
-                        <v-divider class="mb-6 rgb-white-divider" />
+                        <v-divider dark class="mb-6" />
 
                         <div class="d-flex align-center justify-space-between flex-wrap">
                             <div>
@@ -50,7 +50,7 @@
                                 class="rounded-lg font-weight-bold px-6"
                                 @click="handleAddToCart"
                             >
-                                <v-icon right>mdi-cart-plus</v-icon>
+                                <v-icon right class="ml-1">mdi-cart-plus</v-icon>
                                 افزودن به سبد خرید
                             </v-btn>
                         </div>
@@ -127,12 +127,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.rgb-white-divider {
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-.style-description {
-  line-height: 1.8;
-}
-</style>

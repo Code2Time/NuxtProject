@@ -4,7 +4,7 @@
             <v-col cols="12" md="8">
                 <v-card class="glass-card pa-6 pa-md-8 rounded-xl elevation-0">
                     <v-btn text color="primary" class="mb-4" to="/news">
-                        <v-icon right>mdi-arrow-right</v-icon>
+                        <v-icon right class="ml-1">mdi-arrow-right</v-icon>
                         بازگشت به لیست اخبار
                     </v-btn>
 
@@ -24,9 +24,9 @@
                             {{ newsItem.title }}
                         </h1>
 
-                        <v-divider class="mb-6 rgb-white-divider" />
+                        <v-divider dark class="mb-6" />
 
-                        <p class="white--text text-body-1 style-summary">
+                        <p class="white--text text-body-1 text-justify">
                             {{ newsItem.summary }}
                         </p>
                     </template>
@@ -61,13 +61,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.rgb-white-divider {
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.style-summary {
-    line-height: 1.8;
-}
-</style>

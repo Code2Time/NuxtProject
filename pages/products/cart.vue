@@ -1,11 +1,33 @@
 <template>
     <v-container class="py-8 rtl-dir">
         <h1 class="white--text font-weight-bold mb-6 text-h4">
-            <v-icon color="#3B82F6" large class="ml-2">mdi-cart-outline</v-icon>
+            <v-icon color="#3B82F6" large class="ml-2">
+                mdi-cart-outline
+            </v-icon>
             سبد خرید شما
         </h1>
 
-        <v-row v-if="cartItems.length > 0">
+        <v-card v-if="!userIsLoggedIn" class="glass-card pa-12 rounded-xl text-center white--text">
+            <v-icon size="80" color="amber lighten-2" class="mb-4">mdi-account-lock-outline</v-icon>
+            <h2 class="text-h5 font-weight-bold mb-2">
+                جهت مشاهده سبد خرید وارد شوید
+            </h2>
+            
+            <p class="grey--text text--lighten-1 mb-6">
+                برای دسترسی به آیتم‌های سبد خرید و تکمیل سفارش، ابتدا باید وارد حساب کاربری خود شوید.
+            </p>
+            <v-btn 
+                color="primary" 
+                large 
+                to="/login/login?redirect=/products/cart" 
+                class="rounded-lg font-weight-bold px-8"
+            >
+                <v-icon class="ml-2">mdi-login</v-icon>
+                ورود به حساب کاربری
+            </v-btn>
+        </v-card>
+
+        <v-row v-else-if="cartItems.length > 0">
             <v-col cols="12" md="8">
                 <v-card
                     v-for="item in cartItems"
@@ -89,34 +111,34 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  name: 'CartPage',
+    name: 'CartPage',
 
-  created() {
-    if (process.client) {
-      // همگام‌سازی لاگین و سبد خرید در لحظه ورود به صفحه
-      this.$store.dispatch('checkAuth')
+    created() {
+        if (process.client) {
+            this.$store.dispatch('checkAuth')
+        }
+    },
 
-      const isAuth = this.$store.getters.isLoggedIn || localStorage.getItem('isLoggedIn') === 'true'
+    computed: {
+        ...mapGetters(['cartItems', 'cartTotalCount', 'cartTotalPrice']),
 
-      if (!isAuth) {
-        this.$router.replace('/login/login?redirect=/products/cart')
-      }
+        userIsLoggedIn() {
+            if (process.client) {
+                return this.$store.getters.isLoggedIn || localStorage.getItem('isLoggedIn') === 'true'
+            }
+            return false
+        }
+    },
+
+    methods: {
+        ...mapMutations({
+            removeItem: 'REMOVE_FROM_CART',
+            updateQuantity: 'UPDATE_QUANTITY'
+        }),
+
+        updateQty(productId, quantity) {
+            this.updateQuantity({ productId, quantity })
+        }
     }
-  },
-
-  computed: {
-    ...mapGetters(['cartItems', 'cartTotalCount', 'cartTotalPrice'])
-  },
-
-  methods: {
-    ...mapMutations({
-      removeItem: 'REMOVE_FROM_CART',
-      updateQuantity: 'UPDATE_QUANTITY'
-    }),
-
-    updateQty(productId, quantity) {
-      this.updateQuantity({ productId, quantity })
-    }
-  }
 }
 </script>

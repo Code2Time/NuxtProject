@@ -19,11 +19,12 @@
             to="/news"
             exact
             active-class="active-tab"
-            class="mx-1 white--text no-glow"
+            class="mx-1 white--text"
+            elevation="0"
             text
             :ripple="false"
         >
-            <v-icon small class="ml-2 no-glow">mdi-newspaper</v-icon>
+            <v-icon small class="ml-2">mdi-newspaper</v-icon>
             <span>اخبار و اطلاعیه‌ها</span>
         </v-btn>
 
@@ -46,22 +47,23 @@
             to="/products"
             exact
             active-class="active-tab"
-            class="mx-1 white--text no-glow"
+            class="mx-1 white--text"
+            elevation="0"
             text
             :ripple="false"
         >
-            <v-icon small class="ml-2 no-glow">mdi-store</v-icon>
+            <v-icon small class="ml-2">mdi-store</v-icon>
             <span>فروشگاه محصولات</span>
         </v-btn>
 
         <client-only>
             <v-list-item
                 v-if="isMobile"
+                to="/products/cart"
                 exact
                 active-class="active-tab-mobile"
                 class="mb-2"
                 :ripple="false"
-                @click="goToCart"
             >
                 <v-badge
                     :content="cartTotalCount"
@@ -79,12 +81,13 @@
 
             <v-btn
                 v-else
+                to="/products/cart"
                 exact
                 active-class="active-tab"
-                class="mx-1 white--text no-glow"
+                class="mx-1 white--text"
+                elevation="0"
                 text
                 :ripple="false"
-                @click="goToCart"
             >
                 <v-badge
                     :content="cartTotalCount"
@@ -93,7 +96,7 @@
                     overlap
                     class="ml-2 d-inline-flex"
                 >
-                    <v-icon small class="no-glow">mdi-cart-outline</v-icon>
+                    <v-icon small>mdi-cart-outline</v-icon>
                 </v-badge>
                 <span>سبد خرید</span>
             </v-btn>
@@ -120,11 +123,12 @@
                     to="/profile"
                     exact
                     active-class="active-tab"
-                    class="mx-1 white--text no-glow"
+                    class="mx-1 white--text"
+                    elevation="0"
                     text
                     :ripple="false"
                 >
-                    <v-icon small class="ml-2 no-glow">mdi-account-cog</v-icon>
+                    <v-icon small class="ml-2">mdi-account-cog</v-icon>
                     <span>پروفایل کاربری</span>
                 </v-btn>
             </template>
@@ -138,34 +142,21 @@ import { mapGetters } from 'vuex'
 export default {
     name: 'NavLinks',
     props: {
-        isLoggedIn: { type: Boolean, default: false },
-        isMobile: { type: Boolean, default: false }
+        isLoggedIn: { type: Boolean, default: false }
     },
 
     computed: {
         ...mapGetters(['cartTotalCount']),
 
+        isMobile() {
+            return this.$vuetify.breakpoint.smAndDown
+        },
+
         userIsLoggedIn() {
-        if (process.client) {
-            return this.$store.getters.isLoggedIn || localStorage.getItem('isLoggedIn') === 'true'
-        }
-        return this.isLoggedIn
-        }
-    },
-
-    methods: {
-        goToCart() {
-            this.$store.dispatch('checkAuth')
-            
-            const isAuth = this.$store.getters.isLoggedIn || localStorage.getItem('isLoggedIn') === 'true'
-
-            if (isAuth) {
-                if (this.$route.path !== '/products/cart') {
-                    this.$router.push('/products/cart')
-                }
-            } else {
-                this.$router.push('/login/login?redirect=/products/cart')
+            if (process.client) {
+                return this.$store.getters.isLoggedIn || localStorage.getItem('isLoggedIn') === 'true'
             }
+            return this.isLoggedIn
         }
     }
 }
