@@ -1,42 +1,45 @@
 <template>
     <v-card class="white-product-card d-flex flex-column justify-space-between w-100 pa-6 rounded-2xl elevation-2 position-relative h-100">
-        <div v-if="product.badge" class="light-badge position-absolute rounded-pill font-weight-bold text-caption pa-1 px-3">
+        <div 
+            v-if="product.badge" 
+            class="compact-badge position-absolute rounded-pill font-weight-bold grey lighten-3 blue-grey--text text--darken-4 px-3 py-1 text-caption"
+        >
             {{ product.badge }}
         </div>
 
-        <div class="d-flex flex-column flex-grow-1 w-100">
+        <div class="d-flex flex-column flex-grow-1 w-100 pt-8">
             <div class="d-flex align-center mb-4">
-                <v-avatar color="#eff6ff" size="52" class="ml-4 icon-avatar-box flex-shrink-0">
-                    <v-icon color="#2563eb" size="26">{{ product.icon || 'mdi-cube-outline' }}</v-icon>
+                <v-avatar color="blue lighten-5" size="52" class="ml-4 icon-avatar-box flex-shrink-0">
+                    <v-icon color="blue darken-1" size="26">{{ product.icon || 'mdi-cube-outline' }}</v-icon>
                 </v-avatar>
                 <div class="overflow-hidden">
-                    <h3 class="card-title font-weight-bold text-subtitle-1 mb-1 text-truncate">
+                    <h3 class="font-weight-bold text-subtitle-1 mb-1 text-truncate blue-grey--text text--darken-4">
                         {{ product.name || product.title }}
                     </h3>
-                    <span class="card-category font-weight-bold text-caption d-block text-truncate">
+                    <span class="font-weight-bold text-caption d-block text-truncate blue--text text--darken-1">
                         {{ product.category || 'سرویس سازمانی' }}
                     </span>
                 </div>
             </div>
 
-            <p class="card-desc mb-6 font-weight-medium text-caption overflow-hidden flex-grow-1">
+            <p class="card-desc mb-6 font-weight-medium text-caption overflow-hidden flex-grow-1 blue-grey--text text--darken-3">
                 {{ product.description }}
             </p>
 
             <div v-if="product.features && product.features.length" class="mb-6">
-                <div v-for="(feat, fIdx) in product.features" :key="fIdx" class="d-flex align-center mb-2 card-feature text-caption font-weight-medium">
-                    <v-icon small color="#16a34a" class="ml-2 flex-shrink-0">mdi-check-circle</v-icon>
+                <div v-for="(feat, fIdx) in product.features" :key="fIdx" class="d-flex align-center mb-2 text-caption font-weight-medium blue-grey--text text--darken-3">
+                    <v-icon small color="success" class="ml-2 flex-shrink-0">mdi-check-circle</v-icon>
                     <span class="text-truncate">{{ feat }}</span>
                 </div>
             </div>
         </div>
 
         <div class="mt-auto w-100">
-            <v-divider class="mb-4 light-divider"></v-divider>
+            <v-divider class="mb-4"></v-divider>
             <div class="d-flex align-center justify-space-between">
                 <div>
-                    <span class="price-label d-block font-weight-bold text-caption">تعرفه سرویس</span>
-                    <span class="price-value font-weight-black text-subtitle-1">{{ product.price || 'تماس بگیرید' }}</span>
+                    <span class="d-block font-weight-bold text-caption blue-grey--text text--lighten-1">تعرفه سرویس</span>
+                    <span class="font-weight-black text-subtitle-1 blue-grey--text text--darken-4">{{ product.price || 'تماس بگیرید' }}</span>
                 </div>
 
                 <BaseButton
@@ -59,73 +62,46 @@
 import BaseButton from '~/components/Base/BaseButton.vue'
 
 export default {
-  name: 'ProductCard',
+    name: 'ProductCard',
 
-  components: {
-    BaseButton
-  },
+    components: {
+        BaseButton
+    },
 
-  props: {
-    product: {
-      type: Object,
-      required: true
+    props: {
+        product: {
+            type: Object,
+            required: true
+        }
     }
-  }
 }
 </script>
 
 <style scoped>
 .white-product-card {
-  width: 100% !important;
-  max-width: 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 .icon-avatar-box {
-  border: 1px solid #bfdbfe !important;
-}
-
-.card-title {
-  color: #0f172a !important;
-}
-
-.card-category {
-  color: #2563eb !important;
+    border: 1px solid #bfdbfe !important;
 }
 
 .card-desc {
-  color: #334155 !important;
-  line-height: 1.6;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  min-height: 4.8em;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    min-height: 4.8em;
 }
 
-.card-feature {
-  color: #1e293b !important;
-}
-
-.price-label {
-  color: #64748b !important;
-}
-
-.price-value {
-  color: #0f172a !important;
-}
-
-.light-badge {
-  top: 16px;
-  left: 16px;
-  background-color: #f1f5f9;
-  color: #0f172a;
-  border: 1px solid #cbd5e1;
-  z-index: 1;
-}
-
-.action-btn {
-  background-color: #0f172a !important;
-}
-
-.action-btn:hover {
-  background-color: #1e293b !important;
+.compact-badge {
+    top: 16px;
+    left: 16px;
+    display: inline-block;
+    width: fit-content;
+    white-space: nowrap;
+    border: 1px solid #cbd5e1 !important;
+    line-height: 1.2;
+    z-index: 10;
 }
 </style>

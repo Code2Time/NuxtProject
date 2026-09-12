@@ -1,51 +1,55 @@
 <template>
     <div>
-        <v-navigation-drawer v-model="drawer" right app temporary class="pa-4">
-            <div class="d-flex align-center justify-space-between mb-4">
-                <div class="d-flex align-center">
-                    <v-icon color="#3B82F6" class="ml-2" size="28">mdi-shield-check</v-icon>
-                    <span class="text-h6 font-weight-bold">پنل مدیریت</span>
+        <client-only>
+            <v-navigation-drawer v-model="drawer" right app temporary class="pa-4">
+                <div class="d-flex align-center justify-space-between mb-4">
+                    <div class="d-flex align-center">
+                        <v-icon color="#3B82F6" class="ml-2" size="28">mdi-shield-check</v-icon>
+                        <span class="text-h6 font-weight-bold">پنل مدیریت</span>
+                    </div>
+                    <!-- دکمه‌های آیکونی بهتر است v-btn icon باقی بمانند -->
+                    <v-btn icon @click="drawer = false">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
                 </div>
-                <v-btn icon @click="drawer = false">
-                    <v-icon>mdi-close</v-icon>
-                </v-btn>
-            </div>
 
-            <v-divider class="mb-4"></v-divider>
+                <v-divider class="mb-4"></v-divider>
 
-            <v-list nav dense>
-                <v-list-item to="/news" router exact active-class="blue lighten-5 blue--text text--darken-2">
-                    <v-list-item-icon><v-icon>mdi-bullhorn-outline</v-icon></v-list-item-icon>
-                    <v-list-item-title class="font-weight-bold">اخبار و اطلاعات</v-list-item-title>
-                </v-list-item>
-
-                <v-list-item to="/products" router exact active-class="blue lighten-5 blue--text text--darken-2">
-                    <v-list-item-icon><v-icon>mdi-store-outline</v-icon></v-list-item-icon>
-                    <v-list-item-title class="font-weight-bold">فروشگاه محصولات</v-list-item-title>
-                </v-list-item>
-
-                <v-list-item to="/favorites" router exact active-class="blue lighten-5 blue--text text--darken-2">
-                    <v-list-item-icon><v-icon>mdi-heart-outline</v-icon></v-list-item-icon>
-                    <v-list-item-title class="font-weight-bold">علاقه‌مندی‌ها</v-list-item-title>
-                </v-list-item>
-
-                <v-list-item to="/cart" router exact active-class="blue lighten-5 blue--text text--darken-2">
-                    <v-list-item-icon><v-icon>mdi-cart-outline</v-icon></v-list-item-icon>
-                    <v-list-item-title class="font-weight-bold">سبد خرید</v-list-item-title>
-                </v-list-item>
-
-                <template v-if="isAuthenticated">
-                    <v-divider class="my-2"></v-divider>
-                    <v-list-item to="/profile" router exact active-class="blue lighten-5 blue--text text--darken-2">
-                        <v-list-item-icon><v-icon>mdi-account-cog-outline</v-icon></v-list-item-icon>
-                        <v-list-item-title class="font-weight-bold">پروفایل کاربری</v-list-item-title>
+                <v-list nav dense>
+                    <v-list-item to="/news" router exact active-class="blue lighten-5 blue--text text--darken-2">
+                        <v-list-item-icon><v-icon>mdi-bullhorn-outline</v-icon></v-list-item-icon>
+                        <v-list-item-title class="font-weight-bold">اخبار و اطلاعات</v-list-item-title>
                     </v-list-item>
-                </template>
-            </v-list>
-        </v-navigation-drawer>
+
+                    <v-list-item to="/products" router exact active-class="blue lighten-5 blue--text text--darken-2">
+                        <v-list-item-icon><v-icon>mdi-store-outline</v-icon></v-list-item-icon>
+                        <v-list-item-title class="font-weight-bold">فروشگاه محصولات</v-list-item-title>
+                    </v-list-item>
+
+                    <v-list-item to="/favorites" router exact active-class="blue lighten-5 blue--text text--darken-2">
+                        <v-list-item-icon><v-icon>mdi-heart-outline</v-icon></v-list-item-icon>
+                        <v-list-item-title class="font-weight-bold">علاقه‌مندی‌ها</v-list-item-title>
+                    </v-list-item>
+
+                    <v-list-item to="/cart" router exact active-class="blue lighten-5 blue--text text--darken-2">
+                        <v-list-item-icon><v-icon>mdi-cart-outline</v-icon></v-list-item-icon>
+                        <v-list-item-title class="font-weight-bold">سبد خرید</v-list-item-title>
+                    </v-list-item>
+
+                    <template v-if="isAuthenticated">
+                        <v-divider class="my-2"></v-divider>
+                        <v-list-item to="/profile" router exact active-class="blue lighten-5 blue--text text--darken-2">
+                            <v-list-item-icon><v-icon>mdi-account-cog-outline</v-icon></v-list-item-icon>
+                            <v-list-item-title class="font-weight-bold">پروفایل کاربری</v-list-item-title>
+                        </v-list-item>
+                    </template>
+                </v-list>
+            </v-navigation-drawer>
+        </client-only>
 
         <v-app-bar app color="#1E293B" dark height="70" flat class="px-md-4">
             <v-container class="pa-0 d-flex align-center max-width-xl">
+                <!-- دکمه منوی موبایل -->
                 <v-btn icon class="d-md-none ml-2" @click="drawer = !drawer">
                     <v-icon>mdi-menu</v-icon>
                 </v-btn>
@@ -57,6 +61,7 @@
 
                 <v-spacer />
 
+                <!-- لینک‌های ناوبری اصلی (استفاده از BaseButton) -->
                 <div class="d-none d-md-flex align-center nav-links">
                     <BaseButton
                         text
@@ -113,6 +118,7 @@
 
                 <v-spacer />
 
+                <!-- دکمه‌های سمت چپ (ورود / خروج / پروفایل با BaseButton) -->
                 <client-only>
                     <div class="d-flex align-center">
                         <template v-if="isAuthenticated">

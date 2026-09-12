@@ -15,7 +15,7 @@
                     </template>
                 </v-img>
 
-                <span class="position-absolute font-weight-bold text-caption white--text pa-1 px-3 news-category-tag">
+                <span class="position-absolute font-weight-bold text-caption white--text pa-1 px-3 category-tag">
                     {{ item.category || 'اطلاعیه' }}
                 </span>
             </div>
@@ -86,12 +86,7 @@ export default {
 </script>
 
 <style scoped>
-.news-category-tag {
-    top: 12px;
-    right: 12px;
-    background: #0f172a;
-    z-index: 2;
-}
+
 
 .news-title {
     color: #0f172a !important;
