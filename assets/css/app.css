@@ -1,0 +1,45 @@
+.max-width-container {
+    max-width: 1280px !important;
+    margin: 0 auto !important;
+}
+
+.blue-accent-line {
+    width: 4px !important;
+    height: 24px !important;
+    background-color: #2563eb !important;
+    border-radius: 4px !important;
+}
+
+.base-white-card,
+.white-news-card,
+.white-stat-card,
+.white-product-card,
+.white-detail-card,
+.border-card {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.dark-gradient-banner {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
