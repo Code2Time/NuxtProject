@@ -29,7 +29,7 @@
                         </v-img>
 
                         <div class="pa-6 pa-md-8">
-                            <div class="d-flex align-center justify-space-between mb-4 flex-wrap ga-2">
+                            <div class="d-flex align-center justify-space-between mb-4 flex-wrap">
                                 <v-chip color="#eff6ff" text-color="#2563eb" label small class="font-weight-bold px-3">
                                     {{ newsItem.category || 'اطلاعیه' }}
                                 </v-chip>
@@ -37,7 +37,6 @@
                                 <div class="d-flex align-center text-slate text-caption">
                                     <v-icon small color="#64748b" class="ml-1">mdi-calendar-month-outline</v-icon>
                                     <span class="ml-4">{{ newsItem.date || '۱۵ شهریور ۱۴۰۳' }}</span>
-
                                     <v-icon small color="#64748b" class="ml-1">mdi-clock-outline</v-icon>
                                     <span>{{ newsItem.readTime || '۲ دقیقه مطالعه' }}</span>
                                 </div>
@@ -70,8 +69,13 @@
 
                     <v-card v-else class="white-detail-card rounded-2xl pa-8 text-center elevation-1">
                         <v-icon size="64" color="#f59e0b" class="mb-4">mdi-newspaper-remove</v-icon>
+
                         <h2 class="text-h6 font-weight-bold mb-2">خبر مورد نظر یافت نشد</h2>
-                        <p class="text-body-2 text-slate mb-6">این اطلاعیه ممکن است آرشیو یا حذف شده باشد.</p>
+
+                        <p class="text-body-2 text-slate mb-6">
+                            این اطلاعیه ممکن است آرشیو یا حذف شده باشد.
+                        </p>
+
                         <BaseButton
                             color="#2563eb"
                             dark
@@ -93,14 +97,17 @@ import BaseButton from '~/components/Base/BaseButton.vue'
 
 export default {
     name: 'NewsDetailPage',
+
     components: {
         BaseButton
     },
+
     asyncData({ params, error }) {
         try {
             const data = require('~/static/data/news.json')
+
             const newsItem = data.newsList.find(
-                (item) => item.id === parseInt(params.id)
+                (item) => item.id === parseInt(params.id, 10)
             )
 
             if (!newsItem) {
@@ -112,15 +119,32 @@ export default {
             return error({ statusCode: 500, message: 'خطا در دریافت اطلاعات' })
         }
     },
+
     methods: {
-        shareNews() {
+        async shareNews() {
+            const title = this.newsItem?.title || 'خبر'
+            const url = window.location.href
+
             if (navigator.share) {
-                navigator.share({
-                    title: this.newsItem?.title,
-                    url: window.location.href
-                })
-            } else if (this.$toast) {
-                this.$toast.info('لینک خبر کپی شد')
+                try {
+                    await navigator.share({
+                        title,
+                        url
+                    })
+                } catch (error) {
+                    if (error.name !== 'AbortError') {
+                        this.$toast.error('اشتراک‌گذاری خبر انجام نشد')
+                    }
+                }
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+                try {
+                    await navigator.clipboard.writeText(url)
+                    this.$toast.info('لینک خبر کپی شد')
+                } catch (error) {
+                    this.$toast.error('کپی لینک انجام نشد')    
+                }
+            } else{
+                this.$toast.info('امکان اشتراک‌گذاری یا کپی لینک در این مرورگر وجود ندارد')
             }
         }
     }

@@ -1,7 +1,7 @@
 <template>
     <v-card class="white-product-card d-flex flex-column justify-space-between w-100 pa-6 rounded-2xl elevation-2 position-relative h-100">
-        <div 
-            v-if="product.badge" 
+        <div
+            v-if="product.badge"
             class="compact-badge position-absolute rounded-pill font-weight-bold grey lighten-3 blue-grey--text text--darken-4 px-3 py-1 text-caption"
         >
             {{ product.badge }}

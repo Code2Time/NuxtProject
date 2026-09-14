@@ -38,44 +38,48 @@ import ProductCard from '~/components/Products/ProductCard.vue'
 
 export default {
     name: 'ProductsIndexPage',
+
     components: {
         BaseHero,
         ProductStats,
         ProductCard
     },
+
     asyncData() {
         try {
             const jsonData = require('~/static/data/products.json')
             const products = jsonData.products || jsonData || []
+            const stats = jsonData.stats || []
             return { 
                 allData: products, 
-                productList: products 
+                productList: products,
+                stats
             }
         } catch (err) {
-            return { allData: [], productList: [] }
+            console.error('Error loading products.json:', err)
+            return { allData: [], productList: [], stats: [] }
         }
     },
+
     data() {
         return {
-            searchQuery: '',
-            stats: [
-                { title: 'آپتایم و پایداری شبکه', value: '۹۹.۹٪', icon: 'mdi-chart-line-variant' },
-                { title: 'پشتیبانی فنی فعال', value: '۲۴ / ۷', icon: 'mdi-headset' },
-                { title: 'امنیت و رمزنگاری', value: '۲۵۶ بیتی', icon: 'mdi-shield-lock' }
-            ]
+            searchQuery: ''
         }
     },
+
     watch: {
         searchQuery() {
             this.handleSearch()
         }
     },
+
     methods: {
         handleSearch() {
             if (!this.searchQuery || !this.searchQuery.trim()) {
                 this.productList = this.allData
                 return
             }
+
             const query = this.searchQuery.toLowerCase().trim()
             this.productList = this.allData.filter(p => {
                 const titleMatch = (p.name || p.title || '').toLowerCase().includes(query)

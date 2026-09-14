@@ -1,4 +1,22 @@
 {
+  "stats": [
+    {
+      "title": "آپتایم و پایداری شبکه",
+      "value": "۹۹.۹٪",
+      "icon": "mdi-chart-line-variant"
+    },
+    {
+      "title": "پشتیبانی فنی فعال",
+      "value": "۲۴ / ۷",
+      "icon": "mdi-headset"
+    },
+    {
+      "title": "امنیت و رمزنگاری",
+      "value": "۲۵۶ بیتی",
+      "icon": "mdi-shield-lock"
+    }
+  ],
+
   "products": [
     {
       "id": 1,

@@ -1,8 +1,7 @@
 <template>
     <v-card class="dark-gradient-banner pa-8 pa-md-10 text-center rounded-xl elevation-6 white--text border-card">
-        <!-- آیکون بالایی -->
         <div class="mb-4 d-flex justify-center">
-            <v-avatar color="rgba(255, 255, 255, 0.08)" size="80" class="d-flex align-center justify-center">
+            <v-avatar color="rgba(255, 255, 255, 0.08)" size="80">
                 <v-icon size="44" color="#60A5FA">
                     {{ formattedIcon }}
                 </v-icon>
@@ -18,15 +17,15 @@
         </p>
 
         <BaseButton
-            :to="loginRoute"
+            to="/login"
             color="#2563EB"
             :block="false"
-            custom-class="white--text rounded-lg px-8 font-weight-bold elevation-2"
+            c-class="white--text rounded-lg px-8 font-weight-bold elevation-2"
         >
             <v-icon right size="20" color="white" class="ml-2">
                 mdi-login
             </v-icon>
-            ورود به حساب کاربری
+                ورود به حساب کاربری
         </BaseButton>
     </v-card>
 </template>
@@ -36,11 +35,9 @@ import BaseButton from '~/components/Base/BaseButton.vue'
 
 export default {
     name: 'RequireLogin',
-
     components: {
         BaseButton
     },
-
     props: {
         title: {
             type: String,
@@ -53,23 +50,20 @@ export default {
         icon: {
             type: String,
             default: 'mdi-lock'
-        },
-        redirectPath: {
-            type: String,
-            default: ''
         }
     },
 
     computed: {
         formattedIcon() {
-        if (!this.icon) return 'mdi-lock'
-            const cleanIcon = this.icon.trim()
-            return cleanIcon.startsWith('mdi-') ? cleanIcon : `mdi-${cleanIcon}`
-        },
+            if (!this.icon) {
+                return 'mdi-lock'
+            }
 
-        loginRoute() {
-            const target = this.redirectPath || this.$route.fullPath
-            return `/login/?redirect=${encodeURIComponent(target)}`
+            const cleanIcon = this.icon.trim()
+
+            return cleanIcon.startsWith('mdi-')
+                ? cleanIcon
+                : `mdi-${cleanIcon}`
         }
     }
 }

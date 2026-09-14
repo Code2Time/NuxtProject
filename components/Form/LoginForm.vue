@@ -1,7 +1,10 @@
 <template>
     <v-form ref="loginForm" v-model="valid" lazy-validation @submit.prevent="handleLogin">
         <div class="mb-5 text-right">
-            <label class="text-caption font-weight-bold slate-dark--text mb-2 d-block">شماره همراه</label>
+            <label class="text-caption font-weight-bold slate-dark--text mb-2 d-block">
+                شماره همراه
+            </label>
+
             <BaseInput
                 v-model="credentials.phone"
                 placeholder="۰۹۱۲۳۴۵۶۷۸۹"
@@ -16,15 +19,15 @@
 
         <div class="mb-2 text-right">
             <div class="d-flex justify-space-between align-center mb-2">
-                <label class="text-caption font-weight-bold slate-dark--text mb-0">رمز عبور</label>
-                <a
-                    href="#"
-                    class="text-caption grey--text text--darken-1 text-decoration-none hover-blue"
-                    @click.prevent="$toast.info('لطفاً با پشتیبانی سیستم تماس بگیرید')"
-                >
+                <label class="text-caption font-weight-bold slate-dark--text mb-0">
+                    رمز عبور
+                </label>
+
+                <a href="#" class="text-caption grey--text text--darken-1 text-decoration-none hover-blue" @click.prevent="$toast.info('لطفاً با پشتیبانی سیستم تماس بگیرید')">
                     فراموشی رمز؟
                 </a>
             </div>
+
             <BaseInput
                 v-model="credentials.password"
                 placeholder="••••••••"
@@ -44,8 +47,8 @@
                 color="#0f172a"
                 :loading="loading"
                 :disabled="!valid"
-                block
-                class="corporate-btn-primary font-weight-bold rounded-lg elevation-0 text-body-2"
+                :block="true"
+                c-class="corporate-btn-primary"
             >
                 ورود به حساب
             </BaseButton>
@@ -64,20 +67,24 @@ export default {
         BaseButton
     },
     props: {
-        loading: { type: Boolean, default: false }
+        loading: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
             valid: true,
-            credentials: { phone: '', password: '' }
+            credentials: {
+                phone: '',
+                password: ''
+            }
         }
     },
     methods: {
         handleLogin() {
-            if (this.$refs.loginForm && !this.$refs.loginForm.validate()) {
-                return
-            }
-            this.$emit('submit', { ...this.credentials })
+            if ( this.$refs.loginForm && !this.$refs.loginForm.validate()) { return }
+            this.$emit('submit', {...this.credentials})
         }
     }
 }
@@ -115,8 +122,6 @@ export default {
 }
 
 .corporate-btn-primary {
-    background-color: #0f172a !important;
-    color: #ffffff !important;
     height: 48px !important;
     transition: all 0.2s ease;
 }

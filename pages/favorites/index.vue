@@ -33,7 +33,7 @@
                                 to="/products"
                                 color="#3B82F6"
                                 :block="false"
-                                custom-class="white--text rounded-lg px-8 font-weight-bold elevation-1"
+                                c-class="white--text rounded-lg px-8 font-weight-bold elevation-1"
                             >
                                 <v-icon right size="20" class="ml-1">mdi-storefront-outline</v-icon>
                                 مشاهده محصولات

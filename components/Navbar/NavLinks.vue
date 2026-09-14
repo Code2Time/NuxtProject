@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column flex-md-row align-stretch align-md-center fill-width">
+    <div class="d-flex flex-column flex-md-row align-stretch align-md-center w-100">
         <BaseButton
             to="/news"
             exact
@@ -13,7 +13,7 @@
             c-class="mx-1 nav-btn my-1 my-md-0 justify-start justify-md-center"
         >
             <v-icon small class="ml-2">mdi-newspaper</v-icon>
-            <span>اخبار و اطلاعیه‌ها</span>
+            اخبار و اطلاعیه‌ها
         </BaseButton>
 
         <BaseButton
@@ -29,7 +29,7 @@
             c-class="mx-1 nav-btn my-1 my-md-0 justify-start justify-md-center"
         >
             <v-icon small class="ml-2">mdi-store</v-icon>
-            <span>فروشگاه محصولات</span>
+            فروشگاه محصولات
         </BaseButton>
 
         <client-only>
@@ -54,7 +54,7 @@
                 >
                     <v-icon small>mdi-heart-outline</v-icon>
                 </v-badge>
-                <span>علاقه‌مندی‌ها</span>
+                علاقه‌مندی‌ها
             </BaseButton>
         </client-only>
 
@@ -80,7 +80,7 @@
                 >
                     <v-icon small>mdi-cart-outline</v-icon>
                 </v-badge>
-                <span>سبد خرید</span>
+                سبد خرید
             </BaseButton>
         </client-only>
 
@@ -98,7 +98,7 @@
                 c-class="mx-1 nav-btn my-1 my-md-0 justify-start justify-md-center"
             >
                 <v-icon small class="ml-2">mdi-account-cog</v-icon>
-                <span>پروفایل کاربری</span>
+                پروفایل کاربری
             </BaseButton>
         </client-only>
     </div>
@@ -114,17 +114,14 @@ export default {
     components: {
         BaseButton
     },
-
     props: {
         is_logged_in: { type: Boolean, default: false }
     },
-
     data() {
         return {
             favCount: 0
         }
     },
-
     computed: {
         ...mapGetters({
             cart_total_count: 'cartTotalCount'
@@ -137,16 +134,13 @@ export default {
             return this.is_logged_in
         }
     },
-
     mounted() {
         this.updateFavCount()
         window.addEventListener('favorites-updated', this.updateFavCount)
     },
-
     beforeDestroy() {
         window.removeEventListener('favorites-updated', this.updateFavCount)
     },
-
     methods: {
         updateFavCount() {
             if (this.$helper) {
@@ -158,10 +152,6 @@ export default {
 </script>
 
 <style scoped>
-.fill-width {
-    width: 100%;
-}
-
 ::v-deep .nav-btn {
     color: #94a3b8 !important;
     letter-spacing: 0;

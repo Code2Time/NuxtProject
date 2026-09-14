@@ -32,173 +32,138 @@
         :class="['glass-input', cClass]"
         v-on="inputListeners"
         @click:prepend-inner="handlePrependInnerClick"
-    >
-    </v-text-field>
+    />
 </template>
 
 <script>
 export default {
     name: 'BaseInput',
     inheritAttrs: false,
-
     props: {
-
         dir: {
             type: String,
             default: 'rtl'
         },
-
-        value: { 
-            type: [String, Number], 
-            default: '' 
+        value: {
+            type: [String, Number],
+            default: ''
         },
-        
-        type: { 
-            type: String, 
-            default: 'text' 
+        type: {
+            type: String,
+            default: 'text'
         },
-        
-        showPasswordToggle: { 
-            type: Boolean, 
-            default: true 
+        showPasswordToggle: {
+            type: Boolean,
+            default: true
         },
-        
-        label: { 
-            type: String, 
-            default: undefined 
+        label: {
+            type: String,
+            default: undefined
         },
-        
-        placeholder: { 
-            type: String, 
-            default: undefined 
+        placeholder: {
+            type: String,
+            default: undefined
         },
-        
-        rules: { 
-            type: [Array, String], 
-            default: () => [] 
+        rules: {
+            type: [Array, String],
+            default: () => []
         },
-        
-        disabled: { 
-            type: Boolean, 
-            default: false 
+        disabled: {
+            type: Boolean,
+            default: false
         },
-        
-        readonly: { 
-            type: Boolean, 
-            default: false 
+        readonly: {
+            type: Boolean,
+            default: false
         },
-        
-        clearable: { 
-            type: Boolean, 
-            default: false 
+        clearable: {
+            type: Boolean,
+            default: false
         },
-        
-        counter: { 
-            type: [Boolean, Number, String], 
-            default: undefined 
+        counter: {
+            type: [Boolean, Number, String],
+            default: undefined
         },
-        
-        maxlength: { 
-            type: [Number, String], 
-            default: undefined 
+        maxlength: {
+            type: [Number, String],
+            default: undefined
         },
-        
-        loading: { 
-            type: [Boolean, String], 
-            default: false 
+        loading: {
+            type: [Boolean, String],
+            default: false
         },
-        
-        error: { 
-            type: Boolean, 
-            default: false 
+        error: {
+            type: Boolean,
+            default: false
         },
-        
-        errorMessages: { 
-            type: [String, Array], 
-            default: () => [] 
+        errorMessages: {
+            type: [String, Array],
+            default: () => []
         },
-        
-        success: { 
-            type: Boolean, 
-            default: false 
+        success: {
+            type: Boolean,
+            default: false
         },
-        
-        successMessages: { 
-            type: [String, Array], 
-            default: () => [] 
+        successMessages: {
+            type: [String, Array],
+            default: () => []
         },
-        
-        required: { 
-            type: Boolean, 
-            default: false 
+        required: {
+            type: Boolean,
+            default: false
         },
-        
-        appendIcon: { 
-            type: String, 
-            default: undefined 
+        appendIcon: {
+            type: String,
+            default: undefined
         },
-        
-        appendOuterIcon: { 
-            type: String, 
-            default: undefined 
+        appendOuterIcon: {
+            type: String,
+            default: undefined
         },
-        
-        prependIcon: { 
-            type: String, 
-            default: undefined 
+        prependIcon: {
+            type: String,
+            default: undefined
         },
-        
-        prependInnerIcon: { 
-            type: String, 
-            default: undefined 
+        prependInnerIcon: {
+            type: String,
+            default: undefined
         },
-        
-        solo: { 
-            type: Boolean, 
-            default: true 
+        solo: {
+            type: Boolean,
+            default: true
         },
-        
-        rounded: { 
-            type: Boolean, 
-            default: true 
+        rounded: {
+            type: Boolean,
+            default: true
         },
-        
-        flat: { 
-            type: Boolean, 
-            default: true 
+        flat: {
+            type: Boolean,
+            default: true
         },
-        
-        
-        dark: { 
-            type: Boolean, 
-            default: true 
+        dark: {
+            type: Boolean,
+            default: true
         },
-        
-        outlined: { 
-            type: Boolean, 
-            default: false 
+        outlined: {
+            type: Boolean,
+            default: false
         },
-        
-        filled: { 
-            type: Boolean, 
-            default: false 
+        filled: {
+            type: Boolean,
+            default: false
         },
-        
-        dense: { 
-            type: Boolean, 
-            default: false 
+        dense: {
+            type: Boolean,
+            default: false
         },
-        
-        shaped: { 
-            type: Boolean, 
-            default: false 
+        shaped: {
+            type: Boolean,
+            default: false
         },
-        
-        autofocus: { 
-            type: Boolean, 
-            default: false 
+        autofocus: {
+            type: Boolean,
+            default: false
         },
-
         cClass: {
             type: [String, Array, Object],
             default: ''
@@ -221,7 +186,9 @@ export default {
 
         computedPrependInnerIcon() {
             if (this.type === 'password' && this.showPasswordToggle) {
-                return this.showPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
+                return this.showPassword
+                    ? 'mdi-eye-outline'
+                    : 'mdi-eye-off-outline'
             }
             return this.prependInnerIcon
         },
@@ -229,7 +196,9 @@ export default {
         inputListeners() {
             return {
                 ...this.$listeners,
-                input: (event) => this.$emit('input', event)
+                input: event => {
+                    this.$emit('input', event)
+                }
             }
         },
 
@@ -239,11 +208,11 @@ export default {
     },
 
     methods: {
-        handlePrependInnerClick(e) {
+        handlePrependInnerClick(event) {
             if (this.type === 'password' && this.showPasswordToggle) {
                 this.showPassword = !this.showPassword
             }
-            this.$emit('click:prepend-inner', e)
+            this.$emit('click:prepend-inner', event)
         }
     }
 }

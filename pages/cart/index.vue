@@ -18,7 +18,7 @@
                             <v-card class="pa-8 text-center rounded-xl elevation-2 white-news-card white">
                                 <div class="mb-4">
                                     <v-avatar color="#E0F2FE" size="80">
-                                    <v-icon size="48" color="#3B82F6">mdi-cart-off</v-icon>
+                                        <v-icon size="48" color="#3B82F6">mdi-cart-off</v-icon>
                                     </v-avatar>
                                 </div>
 
@@ -34,7 +34,7 @@
                                     to="/products"
                                     color="#3B82F6"
                                     :block="false"
-                                    custom-class="white--text rounded-lg px-8 font-weight-bold elevation-1"
+                                    c-class="white--text rounded-lg px-8 font-weight-bold elevation-1"
                                 >
                                     <v-icon right size="20" class="ml-1">mdi-storefront-outline</v-icon>
                                     مشاهده محصولات
@@ -60,12 +60,13 @@
                                         <v-avatar color="#E0F2FE" rounded size="56" class="ml-4">
                                             <v-icon color="#0284C7">mdi-shield-check-outline</v-icon>
                                         </v-avatar>
+
                                         <div>
                                             <h3 class="text-subtitle-1 font-weight-bold grey--text text--darken-3 mb-1">
-                                            {{ item.title || item.name || (item.product && item.product.title) || 'محصول انتخاب‌شده' }}
+                                                {{ item.title || item.name || (item.product && item.product.title) || 'محصول انتخاب‌شده' }}
                                             </h3>
                                             <span class="text-caption grey--text text--darken-1 d-block">
-                                            {{ item.category || (item.product && item.product.category) || 'زیرساخت' }}
+                                                {{ item.category || (item.product && item.product.category) || 'زیرساخت' }}
                                             </span>
                                         </div>
                                     </div>
@@ -76,7 +77,7 @@
                                                 color="transparent"
                                                 elevation="0"
                                                 :block="false"
-                                                custom-class="pa-0 min-w-0 grey--text text--darken-2"
+                                                c-class="pa-0 min-w-0 grey--text text--darken-2"
                                                 @click="updateQty(getItemKey(item), (item.quantity || item.qty || 1) - 1)"
                                             >
                                                 <v-icon small>mdi-minus</v-icon>
@@ -90,9 +91,9 @@
                                                 color="transparent"
                                                 elevation="0"
                                                 :block="false"
-                                                custom-class="pa-0 min-w-0 grey--text text--darken-2"
+                                                c-class="pa-0 min-w-0 grey--text text--darken-2"
                                                 @click="updateQty(getItemKey(item), (item.quantity || item.qty || 1) + 1)"
-                                                >
+                                            >
                                                 <v-icon small>mdi-plus</v-icon>
                                             </BaseButton>
                                         </div>
@@ -105,7 +106,7 @@
                                             color="transparent"
                                             elevation="0"
                                             :block="false"
-                                            custom-class="pa-0 min-w-0 error--text"
+                                            c-class="pa-0 min-w-0 error--text"
                                             @click="removeItem(getItemKey(item))"
                                         >
                                             <v-icon small>mdi-trash-can-outline</v-icon>
@@ -138,7 +139,7 @@
                                         color="#10B981"
                                         elevation="2"
                                         :block="true"
-                                        custom-class="mt-6 rounded-lg font-weight-bold py-6 text-body-1 white--text"
+                                        c-class="mt-6 rounded-lg font-weight-bold py-6 text-body-1 white--text"
                                         @click="checkout"
                                     >
                                         تکمیل خرید و پرداخت
@@ -156,7 +157,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import BaseButton from '~/components/Base/BaseButton.vue'
-import BaseRequireLogin from '~/components/Base/BaseRequireLogin.vue' // یا مسیر دقیق فایل RequireLogin
+import BaseRequireLogin from '~/components/Base/BaseRequireLogin.vue'
 
 export default {
     name: 'CartPage',
@@ -170,7 +171,7 @@ export default {
         ...mapGetters(['cartItems', 'cartTotalCount', 'cartTotalPrice']),
 
         isAuthenticated() {
-        return this.$store.getters['auth/isAuthenticated']
+            return this.$store.getters['auth/isAuthenticated']
         }
     },
 
@@ -189,23 +190,25 @@ export default {
 
         parseNumericPrice(value) {
             if (value === null || value === undefined) return 0
+
             const strValue = String(value)
                 .replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
                 .replace(/[0-9]/g, (d) => '0123456789'.indexOf(d))
                 .replace(/[^0-9]/g, '')
+
             return parseInt(strValue, 10) || 0
         },
 
         getItemTotalPrice(item) {
-            const rawPrice = item.price 
-                ?? item.unitPrice 
-                ?? item.unit_price 
-                ?? item.totalPrice 
-                ?? item.total_price 
-                ?? item.amount 
-                ?? item.product?.price 
-                ?? item.product?.unitPrice 
-                ?? item.product?.unit_price 
+            const rawPrice = item.price
+                ?? item.unitPrice
+                ?? item.unit_price
+                ?? item.totalPrice
+                ?? item.total_price
+                ?? item.amount
+                ?? item.product?.price
+                ?? item.product?.unitPrice
+                ?? item.product?.unit_price
                 ?? 0
 
             const qty = Number(item.quantity || item.qty || 1)
@@ -216,6 +219,7 @@ export default {
 
         removeItem(id) {
             this.removeFromCart(id)
+
             if (this.$toast) {
                 this.$toast.info('محصول از سبد خرید حذف شد')
             }

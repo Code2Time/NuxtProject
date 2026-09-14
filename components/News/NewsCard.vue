@@ -14,7 +14,6 @@
                         </v-row>
                     </template>
                 </v-img>
-
                 <span class="position-absolute font-weight-bold text-caption white--text pa-1 px-3 category-tag">
                     {{ item.category || 'اطلاعیه' }}
                 </span>
@@ -26,6 +25,7 @@
                         <v-icon small class="ml-1" color="#64748b">mdi-calendar-month-outline</v-icon>
                         <span>{{ item.date || '۱۵ شهریور ۱۴۰۳' }}</span>
                     </div>
+
                     <div class="d-flex align-center">
                         <v-icon small class="ml-1" color="#64748b">mdi-clock-outline</v-icon>
                         <span>{{ item.readTime || '۲ دقیقه مطالعه' }}</span>
@@ -44,6 +44,7 @@
 
         <div class="px-6 pb-6 pt-0">
             <v-divider class="mb-4 light-divider"></v-divider>
+
             <div class="d-flex align-center justify-space-between">
                 <div class="d-flex align-center text-caption font-weight-bold text--secondary">
                     <v-icon small class="ml-1" color="#64748b">mdi-account-circle-outline</v-icon>
@@ -86,8 +87,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .news-title {
     color: #0f172a !important;
     line-height: 1.5;

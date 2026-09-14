@@ -1,3 +1,4 @@
+```vue
 <template>
     <div class="light-news-page">
         <v-container fluid class="max-width-container py-8 px-4 px-md-8">
@@ -8,6 +9,7 @@
                     <div class="blue-accent-line ml-3"></div>
                     <h2 class="text-h5 font-weight-bold grey--text text--darken-4">آخرین اطلاعیه‌ها</h2>
                 </div>
+
                 <span class="text-caption grey--text text--darken-1">تعداد اخبار: {{ newsList.length }}</span>
             </div>
 
@@ -47,10 +49,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.light-news-page {
-    background-color: #f8fafc !important;
-    min-height: 100vh;
-}
-</style>

@@ -11,7 +11,9 @@
                         <NuxtLink to="/products" class="white--text text-decoration-none mx-2 hover-link">
                             فروشگاه
                         </NuxtLink>
+
                         <span class="grey--text text--lighten-1">•</span>
+
                         <NuxtLink to="/news" class="white--text text-decoration-none mx-2 hover-link">
                             اخبار
                         </NuxtLink>
@@ -25,6 +27,7 @@
 <script>
 export default {
     name: 'AppFooter',
+
     data() {
         return {
             currentYear: new Date().getFullYear()

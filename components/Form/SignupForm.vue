@@ -35,7 +35,7 @@
             :loading="loading"
             :disabled="!valid"
             type="submit"
-            class="mt-4"
+            c-class="mt-4"
         >
             ثبت نام
         </BaseButton>
