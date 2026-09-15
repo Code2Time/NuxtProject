@@ -34,7 +34,7 @@
                                     {{ newsItem.category || 'اطلاعیه' }}
                                 </v-chip>
 
-                                <div class="d-flex align-center text-slate text-caption">
+                                <div class="d-flex align-center text-slate text-body-1">
                                     <v-icon small color="#64748b" class="ml-1">mdi-calendar-month-outline</v-icon>
                                     <span class="ml-4">{{ newsItem.date || '۱۵ شهریور ۱۴۰۳' }}</span>
                                     <v-icon small color="#64748b" class="ml-1">mdi-clock-outline</v-icon>
@@ -49,42 +49,13 @@
                             <v-divider class="mb-6" />
 
                             <div class="news-content text-body-1 text-justify">
-                                <p>{{ newsItem.summary || newsItem.content || newsItem.excerpt }}</p>
+                                <p>{{ newsItem.excerpt }}</p>
                             </div>
 
                             <div class="mt-8 pt-6 border-t d-flex align-center justify-space-between">
-                                <span class="text-caption text-slate">منبع: تیم فنی سامانه مدیریت</span>
-
-                                <BaseButton
-                                    icon
-                                    color="#64748b"
-                                    :block="false"
-                                    @click="shareNews"
-                                >
-                                    <v-icon>mdi-share-variant-outline</v-icon>
-                                </BaseButton>
+                                <span class="text-body-1 text-slate">منبع: تیم فنی سامانه مدیریت</span>
                             </div>
                         </div>
-                    </v-card>
-
-                    <v-card v-else class="white-detail-card rounded-2xl pa-8 text-center elevation-1">
-                        <v-icon size="64" color="#f59e0b" class="mb-4">mdi-newspaper-remove</v-icon>
-
-                        <h2 class="text-h6 font-weight-bold mb-2">خبر مورد نظر یافت نشد</h2>
-
-                        <p class="text-body-2 text-slate mb-6">
-                            این اطلاعیه ممکن است آرشیو یا حذف شده باشد.
-                        </p>
-
-                        <BaseButton
-                            color="#2563eb"
-                            dark
-                            :block="false"
-                            c-class="px-6 rounded-xl"
-                            to="/news"
-                        >
-                            بازگشت به اطلاعیه‌ها
-                        </BaseButton>
                     </v-card>
                 </v-col>
             </v-row>
@@ -104,9 +75,9 @@ export default {
 
     asyncData({ params, error }) {
         try {
-            const data = require('~/static/data/news.json')
+            const newsData = require('~/static/data/news.json')
 
-            const newsItem = data.newsList.find(
+            const newsItem = newsData.newsList.find(
                 (item) => item.id === parseInt(params.id, 10)
             )
 
@@ -117,35 +88,6 @@ export default {
             return { newsItem }
         } catch (e) {
             return error({ statusCode: 500, message: 'خطا در دریافت اطلاعات' })
-        }
-    },
-
-    methods: {
-        async shareNews() {
-            const title = this.newsItem?.title || 'خبر'
-            const url = window.location.href
-
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title,
-                        url
-                    })
-                } catch (error) {
-                    if (error.name !== 'AbortError') {
-                        this.$toast.error('اشتراک‌گذاری خبر انجام نشد')
-                    }
-                }
-            } else if (navigator.clipboard && navigator.clipboard.writeText) {
-                try {
-                    await navigator.clipboard.writeText(url)
-                    this.$toast.info('لینک خبر کپی شد')
-                } catch (error) {
-                    this.$toast.error('کپی لینک انجام نشد')    
-                }
-            } else{
-                this.$toast.info('امکان اشتراک‌گذاری یا کپی لینک در این مرورگر وجود ندارد')
-            }
         }
     }
 }

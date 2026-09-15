@@ -1,4 +1,3 @@
-// تابع تبدیل اعداد فارسی/عربی به انگلیسی برای جلوگیری از خطای کیبورد
 const toEnglishDigits = (str) => {
   return String(str || '').replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
 }
@@ -22,7 +21,6 @@ export const mutations = {
 }
 
 export const actions = {
-  // این متد موقع لود برنامه اجرا میشه تا اگر قبلا لاگین کرده، برقرار بمونه
   initAuth({ commit }) {
     if (process.client) {
       const token = localStorage.getItem('user_token')
@@ -38,11 +36,9 @@ export const actions = {
   login({ commit }, credentials) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        // ۱. دریافت مقادیر و تبدیل اعداد فارسی به انگلیسی
         const inputPhone = toEnglishDigits(credentials.phone).trim()
         const inputPassword = String(credentials.password).trim()
 
-        // ۲. بررسی مستقیم و ساده با مقادیر مدنظر شما
         const isValidPhone = inputPhone === '09111111111'
         const isValidPassword = inputPassword === '12345678'
 
@@ -54,11 +50,9 @@ export const actions = {
             role: 'کاربر آنلاین'
           }
 
-          // ذخیره در Vuex برای تغییر آنی نوبار
           commit('SET_TOKEN', token)
           commit('SET_USER', userInfo)
 
-          // ذخیره در localStorage برای ماندگاری بعد از رفرش
           if (process.client) {
             localStorage.setItem('user_token', token)
             localStorage.setItem('user_info', JSON.stringify(userInfo))
@@ -82,7 +76,6 @@ export const actions = {
 }
 
 export const getters = {
-  // برای چک کردن وضعیت لاگین در نوبار و سایر بخش‌ها
   isAuthenticated: (state) => !!state.token || !!state.user,
   currentUser: (state) => state.user
 }

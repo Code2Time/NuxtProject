@@ -3,7 +3,7 @@
         <div class="mb-4 d-flex justify-center">
             <v-avatar color="rgba(255, 255, 255, 0.08)" size="80">
                 <v-icon size="44" color="#60A5FA">
-                    {{ formattedIcon }}
+                    {{ icon }}
                 </v-icon>
             </v-avatar>
         </div>
@@ -54,17 +54,17 @@ export default {
     },
 
     computed: {
-        formattedIcon() {
-            if (!this.icon) {
-                return 'mdi-lock'
-            }
+        // formattedIcon() {
+        //     if (!this.icon) {
+        //         return 'mdi-lock'
+        //     }
 
-            const cleanIcon = this.icon.trim()
+        //     const cleanIcon = this.icon.trim()
 
-            return cleanIcon.startsWith('mdi-')
-                ? cleanIcon
-                : `mdi-${cleanIcon}`
-        }
+        //     return cleanIcon.startsWith('mdi-')
+        //         ? cleanIcon
+        //         : `mdi-${cleanIcon}`
+        // }
     }
 }
 </script>

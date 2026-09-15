@@ -1,6 +1,3 @@
-// store/index.js
-
-// تابع کمکی برای تبدیل اعداد فارسی/عربی به انگلیسی و استخراج عدد
 function parseNumericPrice(value) {
   if (value === null || value === undefined) return 0
   const strValue = String(value)
@@ -40,7 +37,6 @@ export const getters = {
     }, 0)
   },
 
-  // Getters برای علاقه‌مندی‌ها
   favoriteItems: (state) => state.favorites,
   favoritesCount: (state) => state.favorites.length,
   isFavorite: (state) => (productId) => {
@@ -49,7 +45,6 @@ export const getters = {
 }
 
 export const mutations = {
-  // Cart Mutations
   ADD_TO_CART(state, product) {
     const itemKey = product.id || product.productId || product.product_id || product._id
     const existingItem = state.cart.find((item) => (item.id || item.productId || item.product_id || item._id) === itemKey)
@@ -75,7 +70,6 @@ export const mutations = {
     state.cart = cartData || []
   },
 
-  // Favorites Mutations
   TOGGLE_FAVORITE(state, product) {
     const prodId = product.id || product.productId || product._id
     const index = state.favorites.findIndex((item) => (item.id || item.productId || item._id) === prodId)
@@ -96,7 +90,6 @@ export const mutations = {
 }
 
 export const actions = {
-  // Cart Actions
   addToCart({ commit, state, rootState }, product) {
     commit('ADD_TO_CART', product)
     saveCartToLocalStorage(state, rootState)
@@ -130,7 +123,6 @@ export const actions = {
     }
   },
 
-  // Favorites Actions
   toggleFavorite({ commit, state, rootState }, product) {
     commit('TOGGLE_FAVORITE', product)
     saveFavoritesToLocalStorage(state, rootState)

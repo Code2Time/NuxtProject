@@ -114,7 +114,7 @@
                                     </div>
 
                                     <div class="text-caption grey--text text--darken-1 mt-1">
-                                        {{ cartCount }} کالا در سبد خرید
+                                        {{ this.$store.getters.cartTotalCount }} کالا در سبد خرید
                                     </div>
                                 </div>
 
@@ -140,7 +140,7 @@
                                     </div>
 
                                     <div class="text-caption grey--text text--darken-1 mt-1">
-                                        {{ favoriteCount }} محصول ذخیره‌شده
+                                        {{ this.$store.getters.favoritesCount }} محصول ذخیره‌شده
                                     </div>
                                 </div>
 
@@ -288,7 +288,7 @@ import BaseButton from '~/components/Base/BaseButton.vue'
 export default {
     name: 'ProfilePage',
 
-    layout: "profile",
+    layout: "profileLayout",
 
     components: {
         BaseButton
@@ -297,16 +297,6 @@ export default {
     computed: {
         user() {
             return this.$store.getters['auth/currentUser']
-        },
-
-        cartCount() {
-            const items = this.$store.getters.cartItems || []
-            return items.length
-        },
-
-        favoriteCount() {
-            const items = this.$store.getters.favoriteItems || []
-            return items.length
         }
     },
 

@@ -22,7 +22,7 @@
                             </v-icon>
                         </v-avatar>
 
-                        <div>
+                        <div >
                             <h1 class="text-h4 font-weight-bold grey--text text--darken-3 mb-1">
                                 {{ product.name || product.title }}
                             </h1>
@@ -122,30 +122,17 @@ export default {
         ...mapGetters(['isFavorite']),
 
         isFav() {
-            if (!this.product) return false
+            if (!this.product) {
+                return false
+            }
 
-            const id = this.product.id || this.product.productId || this.product._id
-
-            return this.isFavorite(id)
+            return this.isFavorite(
+                this.$helper.getProductId(this.product)
+            )
         },
 
         formattedPrice() {
-            if (!this.product || this.product.price === undefined || this.product.price === null) {
-                return '۰'
-            }
-
-            const priceString = String(this.product.price)
-                .replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
-                .replace(/[0-9]/g, (d) => '0123456789'.indexOf(d))
-                .replace(/[^0-9]/g, '')
-
-            const priceNum = Number(priceString)
-
-            if (isNaN(priceNum) || priceString === '') {
-                return this.product.price
-            }
-
-            return priceNum.toLocaleString('fa-IR')
+            return this.$helper.formatPrice(this.product.price)
         }
     },
 

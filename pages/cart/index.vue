@@ -131,7 +131,8 @@
                                     <div class="d-flex justify-space-between py-4 light-divider">
                                         <span class="grey--text text--darken-1 font-weight-medium">جمع کل:</span>
                                         <span class="font-weight-bold text-h6 success--text">
-                                            {{ formatPrice(cartTotalPrice) }} تومان
+                                            {{ $helper.formatPrice(cartTotalPrice) }}
+                                            تومان
                                         </span>
                                     </div>
 
@@ -185,18 +186,7 @@ export default {
         ...mapActions(['removeFromCart', 'updateQuantity', 'loadUserCart']),
 
         getItemKey(item) {
-            return item.id || item.productId || item.product_id || item._id
-        },
-
-        parseNumericPrice(value) {
-            if (value === null || value === undefined) return 0
-
-            const strValue = String(value)
-                .replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
-                .replace(/[0-9]/g, (d) => '0123456789'.indexOf(d))
-                .replace(/[^0-9]/g, '')
-
-            return parseInt(strValue, 10) || 0
+            return this.$helper.getProductId(item)
         },
 
         getItemTotalPrice(item) {
@@ -212,9 +202,8 @@ export default {
                 ?? 0
 
             const qty = Number(item.quantity || item.qty || 1)
-            const numericPrice = this.parseNumericPrice(rawPrice)
-
-            return this.formatPrice(numericPrice * qty)
+            const numericPrice = this.$helper.parseNumericPrice(rawPrice)
+            return this.$helper.formatPrice(numericPrice * qty)
         },
 
         removeItem(id) {
@@ -229,11 +218,6 @@ export default {
             if (quantity > 0) {
                 this.updateQuantity({ productId, quantity })
             }
-        },
-
-        formatPrice(value) {
-            const numericValue = this.parseNumericPrice(value)
-            return numericValue.toLocaleString('fa-IR')
         },
 
         checkout() {

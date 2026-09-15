@@ -95,7 +95,14 @@
                         :rounded="false"
                         c-class="mx-1 rounded-lg"
                     >
-                        <v-icon right size="18" class="ml-1">mdi-heart-outline</v-icon>
+                        <v-badge
+                            :content="favoritesCount"
+                            :value="isAuthenticated && favoritesCount > 0"
+                            color="red"
+                            overlap
+                        >
+                            <v-icon right size="18">mdi-heart-outline</v-icon>
+                        </v-badge>
                         علاقه‌مندی‌ها
                     </BaseButton>
 
@@ -108,7 +115,14 @@
                         :rounded="false"
                         c-class="mx-1 rounded-lg"
                     >
-                        <v-icon right size="18" class="ml-1">mdi-cart-outline</v-icon>
+                        <v-badge
+                            :content="cartTotalCount"
+                            :value="isAuthenticated && cartTotalCount > 0"
+                            color="red"
+                            overlap
+                        >
+                            <v-icon right size="18">mdi-cart-outline</v-icon>
+                        </v-badge>
                         سبد خرید
                     </BaseButton>
                 </div>
@@ -166,6 +180,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import BaseButton from '~/components/Base/BaseButton.vue'
 
 export default {
@@ -179,11 +194,15 @@ export default {
     computed: {
         isAuthenticated() {
             return this.$store.getters['auth/isAuthenticated']
-        }
+        },
+        ...mapGetters([
+            'cartTotalCount',
+            'favoritesCount'
+        ])
     },
     methods: {
-        handleLogout() {
-            this.$store.dispatch('auth/logout')
+        async handleLogout() {
+            await this.$store.dispatch('auth/logout')
             if (this.$route.path !== '/') {
                 this.$router.push('/')
             }

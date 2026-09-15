@@ -51,13 +51,13 @@ export default {
             const products = jsonData.products || jsonData || []
             const stats = jsonData.stats || []
             return { 
-                allData: products, 
+                allProducts: products, 
                 productList: products,
                 stats
             }
         } catch (err) {
             console.error('Error loading products.json:', err)
-            return { allData: [], productList: [], stats: [] }
+            return { allProducts: [], productList: [], stats: [] }
         }
     },
 
@@ -81,7 +81,7 @@ export default {
             }
 
             const query = this.searchQuery.toLowerCase().trim()
-            this.productList = this.allData.filter(p => {
+            this.productList = this.allProducts.filter(p => {
                 const titleMatch = (p.name || p.title || '').toLowerCase().includes(query)
                 const descMatch = (p.description || '').toLowerCase().includes(query)
                 const categoryMatch = (p.category || '').toLowerCase().includes(query)
