@@ -95,15 +95,15 @@
                         :rounded="false"
                         c-class="mx-1 rounded-lg"
                     >
-                        <v-badge
-                            :content="favoritesCount"
-                            :value="isAuthenticated && favoritesCount > 0"
-                            color="red"
-                            overlap
-                        >
-                            <v-icon right size="18">mdi-heart-outline</v-icon>
-                        </v-badge>
-                        علاقه‌مندی‌ها
+                    <v-icon right size="18" class="ml-1">
+                        mdi-heart-outline
+                    </v-icon>
+
+                    <span>علاقه‌مندی‌ها</span>
+
+                    <v-chip v-if="isAuthenticated && favoritesCount > 0" x-small color="red" text-color="white" class="mr-2 font-weight-bold">
+                        {{ favoritesCount }}
+                    </v-chip>
                     </BaseButton>
 
                     <BaseButton
@@ -115,15 +115,15 @@
                         :rounded="false"
                         c-class="mx-1 rounded-lg"
                     >
-                        <v-badge
-                            :content="cartTotalCount"
-                            :value="isAuthenticated && cartTotalCount > 0"
-                            color="red"
-                            overlap
-                        >
-                            <v-icon right size="18">mdi-cart-outline</v-icon>
-                        </v-badge>
-                        سبد خرید
+                    <v-icon right size="18" class="ml-1">
+                        mdi-cart-outline
+                    </v-icon>
+
+                    <span>سبد خرید</span>
+
+                    <v-chip v-if="isAuthenticated && cartTotalCount > 0" x-small color="red" text-color="white" class="mr-2 font-weight-bold">
+                        {{ cartTotalCount }}
+                    </v-chip>
                     </BaseButton>
                 </div>
 
@@ -201,10 +201,31 @@ export default {
         ])
     },
     methods: {
+        loadUserData() {
+            if (!this.isAuthenticated) {
+                return
+            }
+
+            this.$store.dispatch('loadUserCart')
+            this.$store.dispatch('loadUserFavorites')
+        },
+
         async handleLogout() {
             await this.$store.dispatch('auth/logout')
             if (this.$route.path !== '/') {
                 this.$router.push('/')
+            }
+        }
+    },
+
+    mounted() {
+        this.loadUserData()
+    },
+
+    watch: {
+        isAuthenticated(value) {
+            if (value) {
+                this.loadUserData()
             }
         }
     }
