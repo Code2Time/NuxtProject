@@ -3,8 +3,14 @@ function parseNumericPrice(value) {
         return 0
     }
 
-    const Value = String(value)
-    const onlyDigits = Value.replace(/[^0-9]/g, '')
+    const englishValue = String(value)
+    const persianDigits = '۰۱۲۳۴۵۶۷۸۹'
+    const arabicDigits = '٠١٢٣٤٥٦٧٨٩'
+    const converted = englishValue
+        .replace(/[۰-۹]/g, (d) => persianDigits.indexOf(d))
+        .replace(/[٠-٩]/g, (d) => arabicDigits.indexOf(d))
+
+    const onlyDigits = converted.replace(/[^0-9]/g, '')
 
     return parseInt(onlyDigits, 10) || 0
 }
@@ -14,6 +20,7 @@ function formatPrice(value) {
     const price = parseNumericPrice(value)
     return price.toLocaleString('fa-IR')
 }
+
 
 function getProductId(product) {
     if (!product) {
@@ -28,6 +35,7 @@ function getProductId(product) {
         null
     )
 }
+
 
 export default function (_, inject) {
     inject('helper', {
