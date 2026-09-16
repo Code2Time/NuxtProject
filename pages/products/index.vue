@@ -69,17 +69,16 @@ export default {
 
     methods: {
         handleSearch() {
-            if (!this.searchQuery || !this.searchQuery.trim()) {
+            const query = (this.searchQuery || '').trim().toLowerCase()
+            
+            if (!query) {
                 this.productList = this.allProducts
                 return
             }
-
-            const query = this.searchQuery.toLowerCase().trim()
+            
             this.productList = this.allProducts.filter(p => {
-                const titleMatch = (p.name || p.title || '').toLowerCase().includes(query)
-                const descMatch = (p.description || '').toLowerCase().includes(query)
-                const categoryMatch = (p.category || '').toLowerCase().includes(query)
-                return titleMatch || descMatch || categoryMatch
+                const name = (p.name).toLowerCase()                
+                return name.includes(query)
             })
         }
     }
