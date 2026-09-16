@@ -1,7 +1,7 @@
 <template>
     <div class="light-admin-page">
         <v-container fluid class="max-width-container py-8 px-4 px-md-8">
-            <BaseHero type="products" v-model="searchQuery" />
+            <BaseHero type="products" v-model="searchQuery" @search="handleSearch" />
 
             <ProductStats :stats="stats" />
 
@@ -67,16 +67,10 @@ export default {
         }
     },
 
-    watch: {
-        searchQuery() {
-            this.handleSearch()
-        }
-    },
-
     methods: {
         handleSearch() {
             if (!this.searchQuery || !this.searchQuery.trim()) {
-                this.productList = this.allData
+                this.productList = this.allProducts
                 return
             }
 

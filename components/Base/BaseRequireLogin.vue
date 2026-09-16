@@ -8,7 +8,7 @@
             </v-avatar>
         </div>
 
-        <h2 class="text-h5 font-weight-bold white--text mb-3">
+        <h2 class="font-weight-bold white--text mb-3">
             {{ title }}
         </h2>
 
@@ -20,7 +20,8 @@
             to="/login"
             color="#2563EB"
             :block="false"
-            c-class="white--text rounded-lg px-8 font-weight-bold elevation-2"
+            elevation="2"
+            c-class="white--text rounded-lg px-8 font-weight-bold"
         >
             <v-icon right size="20" color="white" class="ml-2">
                 mdi-login
@@ -31,13 +32,8 @@
 </template>
 
 <script>
-import BaseButton from '~/components/Base/BaseButton.vue'
-
 export default {
     name: 'RequireLogin',
-    components: {
-        BaseButton
-    },
     props: {
         title: {
             type: String,
@@ -52,20 +48,6 @@ export default {
             default: 'mdi-lock'
         }
     },
-
-    computed: {
-        // formattedIcon() {
-        //     if (!this.icon) {
-        //         return 'mdi-lock'
-        //     }
-
-        //     const cleanIcon = this.icon.trim()
-
-        //     return cleanIcon.startsWith('mdi-')
-        //         ? cleanIcon
-        //         : `mdi-${cleanIcon}`
-        // }
-    }
 }
 </script>
 

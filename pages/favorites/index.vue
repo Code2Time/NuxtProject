@@ -32,8 +32,9 @@
                             <BaseButton
                                 to="/products"
                                 color="#3B82F6"
+                                elevation="1"
                                 :block="false"
-                                c-class="white--text rounded-lg px-8 font-weight-bold elevation-1"
+                                c-class="rounded-lg px-8 font-weight-bold"
                             >
                                 <v-icon right size="20" class="ml-1">mdi-storefront-outline</v-icon>
                                 مشاهده محصولات
@@ -68,7 +69,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import BaseButton from '~/components/Base/BaseButton.vue'
 import ProductCard from '~/components/Products/ProductCard.vue'
 import BaseRequireLogin from '~/components/Base/BaseRequireLogin.vue'   
 
@@ -76,7 +76,6 @@ export default {
 name: 'FavoritesPage',
 
     components: {
-        BaseButton,
         ProductCard,
         BaseRequireLogin
     },

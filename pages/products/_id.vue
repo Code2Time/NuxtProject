@@ -6,10 +6,10 @@
                 <v-card class="pa-6 pa-md-8 rounded-xl elevation-2 white">
                     <BaseButton
                         to="/products"
-                        color="transparent"
+                        color="primary"
                         elevation="0"
                         :block="false"
-                        c-class="mb-4 font-weight-bold px-0 primary--text"
+                        c-class="mb-4 font-weight-bold px-0"
                     >
                         <v-icon right class="ml-1">mdi-arrow-right</v-icon>
                         بازگشت به فروشگاه
@@ -63,7 +63,7 @@
                                 color="#10B981"
                                 elevation="2"
                                 :block="false"
-                                c-class="rounded-lg font-weight-bold px-6 ml-3 white--text"
+                                c-class="rounded-lg font-weight-bold px-6 ml-3"
                                 @click="handleAddToCart"
                             >
                                 <v-icon right class="ml-1">mdi-cart-plus</v-icon>
@@ -91,22 +91,13 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import BaseButton from '~/components/Base/BaseButton.vue'
 
 export default {
     name: 'ProductDetailPage',
-
-    components: {
-        BaseButton
-    },
-
     asyncData({ params, error }) {
         try {
             const data = require('~/static/data/products.json')
-
-            const product = data.products.find(
-                (item) => item.id === parseInt(params.id, 10)
-            )
+            const product = data.products.find((item) => item.id === parseInt(params.id, 10))
 
             if (!product) {
                 return error({ statusCode: 404, message: 'محصول یافت نشد' })

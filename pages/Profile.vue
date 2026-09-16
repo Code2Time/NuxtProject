@@ -283,16 +283,9 @@
 </template>
 
 <script>
-import BaseButton from '~/components/Base/BaseButton.vue'
-
 export default {
     name: 'ProfilePage',
-
     layout: "profileLayout",
-
-    components: {
-        BaseButton
-    },
 
     computed: {
         user() {
@@ -306,8 +299,7 @@ export default {
 
     methods: {
         checkAuthStatus() {
-            const isLoggedIn =
-                this.$store.getters['auth/isAuthenticated']
+            const isLoggedIn = this.$store.getters['auth/isAuthenticated']
 
             if (!isLoggedIn) {
                 if (this.$toast) {

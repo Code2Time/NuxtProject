@@ -33,8 +33,9 @@
                                 <BaseButton
                                     to="/products"
                                     color="#3B82F6"
+                                    elevation="1"
                                     :block="false"
-                                    c-class="white--text rounded-lg px-8 font-weight-bold elevation-1"
+                                    c-class="white--text rounded-lg px-8 font-weight-bold"
                                 >
                                     <v-icon right size="20" class="ml-1">mdi-storefront-outline</v-icon>
                                     مشاهده محصولات
@@ -77,7 +78,7 @@
                                                 color="transparent"
                                                 elevation="0"
                                                 :block="false"
-                                                c-class="pa-0 min-w-0 grey--text text--darken-2"
+                                                c-class="pa-0 min-w-0 "
                                                 @click="updateQty(getItemKey(item), (item.quantity || item.qty || 1) - 1)"
                                             >
                                                 <v-icon small>mdi-minus</v-icon>
@@ -91,7 +92,7 @@
                                                 color="transparent"
                                                 elevation="0"
                                                 :block="false"
-                                                c-class="pa-0 min-w-0 grey--text text--darken-2"
+                                                c-class="pa-0 min-w-0"
                                                 @click="updateQty(getItemKey(item), (item.quantity || item.qty || 1) + 1)"
                                             >
                                                 <v-icon small>mdi-plus</v-icon>
@@ -140,7 +141,7 @@
                                         color="#10B981"
                                         elevation="2"
                                         :block="true"
-                                        c-class="mt-6 rounded-lg font-weight-bold py-6 text-body-1 white--text"
+                                        c-class="mt-6 rounded-lg font-weight-bold py-6 text-body-1"
                                         @click="checkout"
                                     >
                                         تکمیل خرید و پرداخت
@@ -157,14 +158,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import BaseButton from '~/components/Base/BaseButton.vue'
 import BaseRequireLogin from '~/components/Base/BaseRequireLogin.vue'
 
 export default {
     name: 'CartPage',
 
     components: {
-        BaseButton,
         BaseRequireLogin
     },
 

@@ -32,8 +32,12 @@ export default {
     '~/plugins/helper'
   ],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  // Auto import components: https://go.nuxtjs.dev/config-components  
+  components: [
+    {
+      path: '~/components',
+    },
+  ],
   
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -72,6 +76,9 @@ export default {
   vuetify: {
     rtl: true,
     customVariables: ['~/assets/variables.scss'],
+    defaultAssets: {
+      font: false
+    },
     theme: {
       dark: false,
       themes: {
@@ -98,5 +105,5 @@ export default {
   script: [
       // افزودن اسکریپت Tailwind CSS بدون نیاز به npm install
       { src: 'https://cdn.tailwindcss.com' }
-    ]
+  ]
 }

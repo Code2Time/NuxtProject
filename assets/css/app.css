@@ -3,7 +3,19 @@ body {
     font-family: 'Vazirmatn', sans-serif;
 }
 
-.v-application {
+.v-application .text-h1,
+.v-application .text-h2,
+.v-application .text-h3,
+.v-application .text-h4,
+.v-application .text-h5,
+.v-application .text-h6,
+.v-application .text-subtitle-1,
+.v-application .text-subtitle-2,
+.v-application .text-body-1,
+.v-application .text-body-2,
+.v-application .text-button,
+.v-application .text-caption,
+.v-application .text-overline {
     font-family: 'Vazirmatn', sans-serif !important;
 }
 
@@ -51,11 +63,4 @@ body {
     background: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-.category-tag {
-    top: 12px;
-    right: 12px;
-    background: #0f172a;
-    z-index: 2;
 }

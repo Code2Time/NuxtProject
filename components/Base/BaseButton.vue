@@ -1,25 +1,37 @@
-```vue
 <template>
     <v-btn
-        :loading="loading"
-        :disabled="disabled"
-        :type="type"
-        :color="color"
+        :absolute="absolute"
+        :active-class="activeClass"
         :block="block"
-        :x-large="xLarge"
-        :large="large"
-        :small="small"
-        :rounded="rounded"
+        :bottom="bottom"
+        :color="color"
         :depressed="depressed"
+        :disabled="disabled"
+        :elevation="elevation"
+        :fixed="fixed"
+        :height="height"
+        :left="left"
+        :loading="loading"
+        :max-height="maxHeight"
+        :max-width="maxWidth"
+        :min-height="minHeight"
+        :min-width="minWidth"
         :outlined="outlined"
-        :class="[
-            'white--text',
-            'text-none',
-            'elevation-0',
-            cClass
-        ]"
-        v-bind="$attrs"
-        v-on="$listeners"
+        :plain="plain"
+        :right="right"
+        :rounded="rounded"
+        :shaped="shaped"
+        :target="target"
+        :text="text"
+        :tile="tile"
+        :to="to"
+        :top="top"
+        :type="type"
+        :width="width"
+        :x-large="xLarge"
+        :x-small="xSmall"
+        :class="[ 'white--text', 'text-none', cClass]"
+        @click="$emit('click', $event)"
     >
         <slot></slot>
     </v-btn>
@@ -28,24 +40,79 @@
 <script>
 export default {
     name: 'BaseButton',
-    inheritAttrs: false,
 
     props: {
-        loading: {
+        absolute: {
             type: Boolean,
             default: false
         },
-        disabled: {
+        fixed: {
             type: Boolean,
             default: false
         },
-        type: {
+        top: {
+            type: Boolean,
+            default: false
+        },
+        bottom: {
+            type: Boolean,
+            default: false
+        },
+        left: {
+            type: Boolean,
+            default: false
+        },
+        right: {
+            type: Boolean,
+            default: false
+        },
+        target: {
             type: String,
-            default: 'button'
+            default: undefined
+        },
+        to: {
+            type: [String, Object],
+            default: undefined
         },
         color: {
             type: String,
             default: 'orange darken-4'
+        },
+        activeClass:{
+            type: String,
+            default: undefined
+        },
+        outlined: {
+            type: Boolean,
+            default: false
+        },
+        plain: {
+            type: Boolean,
+            default: false
+        },
+        rounded: {
+            type: Boolean,
+            default: true
+        },
+        elevation: {
+            type: [Number, String],
+            default: undefined
+        },
+        shaped: {
+            type: Boolean,
+            default: false
+        },
+        text: {
+            type: Boolean,
+            default: false
+        },
+        tile: {
+            type: Boolean,
+            default: false
+        },
+        depressed: {
+            type: Boolean,
+            default: true
         },
         block: {
             type: Boolean,
@@ -55,26 +122,47 @@ export default {
             type: Boolean,
             default: true
         },
-        large: {
+        xSmall: {
             type: Boolean,
             default: false
         },
-        small: {
+        height: {
+            type: [Number, String],
+            default: undefined
+        },
+        width: {
+            type: [Number, String],
+            default: undefined
+        },
+        maxHeight: {
+            type: [Number, String],
+            default: undefined
+        },
+        maxWidth: {
+            type: [Number, String],
+            default: undefined
+        },
+        minHeight: {
+            type: [Number, String],
+            default: undefined
+        },
+        minWidth: {
+            type: [Number, String],
+            default: undefined
+        },
+        disabled: {
             type: Boolean,
             default: false
         },
-        rounded: {
-            type: Boolean,
-            default: true
-        },
-        depressed: {
-            type: Boolean,
-            default: true
-        },
-        outlined: {
+        loading: {
             type: Boolean,
             default: false
         },
+        type: {
+            type: String,
+            default: 'button'
+        },
+
         cClass: {
             type: [String, Array, Object],
             default: ''

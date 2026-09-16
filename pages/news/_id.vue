@@ -4,8 +4,7 @@
             <v-row justify="center">
                 <v-col cols="12" md="10" lg="8">
                     <BaseButton
-                        text
-                        color="#2563eb"
+                        color="primary"
                         :block="false"
                         c-class="mb-4 font-weight-bold px-0"
                         to="/news"
@@ -76,10 +75,7 @@ export default {
     asyncData({ params, error }) {
         try {
             const newsData = require('~/static/data/news.json')
-
-            const newsItem = newsData.newsList.find(
-                (item) => item.id === parseInt(params.id, 10)
-            )
+            const newsItem = newsData.newsList.find((item) => item.id === parseInt(params.id, 10))
 
             if (!newsItem) {
                 return error({ statusCode: 404, message: 'خبر یافت نشد' })

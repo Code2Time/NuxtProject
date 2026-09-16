@@ -63,6 +63,7 @@
                     <BaseButton
                         text
                         to="/news"
+                        color="grey darken-3"
                         active-class="active-link"
                         :block="false"
                         :x-large="false"
@@ -163,10 +164,11 @@
                             <BaseButton
                                 color="#3B82F6"
                                 to="/login"
+                                elevation="1"
                                 :block="false"
                                 :x-large="false"
                                 :rounded="false"
-                                c-class="rounded-lg font-weight-bold px-4 elevation-1 white--text"
+                                c-class="rounded-lg font-weight-bold px-4"
                             >
                                 <v-icon right size="18" class="ml-1">mdi-login</v-icon>
                                 ورود به حساب
@@ -181,11 +183,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import BaseButton from '~/components/Base/BaseButton.vue'
 
 export default {
     name: 'AppNavbar',
-    components: { BaseButton },
     data() {
         return {
             drawer: false

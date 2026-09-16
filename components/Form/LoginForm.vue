@@ -58,13 +58,11 @@
 
 <script>
 import BaseInput from '~/components/Base/BaseInput.vue'
-import BaseButton from '~/components/Base/BaseButton.vue'
 
 export default {
     name: 'LoginForm',
     components: {
-        BaseInput,
-        BaseButton
+        BaseInput
     },
     props: {
         loading: {

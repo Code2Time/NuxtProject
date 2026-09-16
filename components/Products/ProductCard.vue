@@ -48,7 +48,7 @@
                     elevation="0"
                     :block="false"
                     :x-large="false"
-                    c-class="white--text font-weight-bold px-4 rounded-lg"
+                    c-class="font-weight-bold px-4 rounded-lg"
                 >
                     مشاهده محصول
                     <v-icon small class="mr-1">mdi-arrow-left</v-icon>
@@ -59,15 +59,8 @@
 </template>
 
 <script>
-import BaseButton from '~/components/Base/BaseButton.vue'
-
 export default {
     name: 'ProductCard',
-
-    components: {
-        BaseButton
-    },
-
     props: {
         product: {
             type: Object,

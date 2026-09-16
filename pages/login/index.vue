@@ -34,109 +34,85 @@
                                     </p>
                                 </div>
 
-                                <LoginForm
-                                    :loading="loading"
-                                    @submit="handleLogin"
-                                />
+                                <LoginForm :loading="loading" @submit="handleLogin" />
                             </div>
 
-                            <div class="mt-8 pt-4 border-t d-flex justify-space-between align-center text-caption">
-                                <span class="blue-grey--text text--lighten-2">
+                            <div class="mt-8 text-center">
+                                <v-divider class="mb-5"></v-divider>
+
+                                <p class="text-caption blue-grey--text text--lighten-1 mb-3">
                                     نیاز به راهنمایی دارید؟
-                                </span>
+                                </p>
 
                                 <a
                                     href="#"
-                                    class="font-weight-bold blue-grey--text text--darken-2 text-decoration-none"
+                                    class="text-caption font-weight-bold primary--text text-decoration-none"
                                     @click.prevent="$toast.info('لطفاً با پشتیبانی سیستم تماس بگیرید')"
                                 >
-                                    پشتیبانی فنی
+                                    تماس با پشتیبانی فنی
                                 </a>
                             </div>
                         </v-col>
 
-                        <v-col cols="12" md="6" class="hidden-sm-and-down brand-banner relative d-flex flex-column justify-space-between pa-10 overflow-hidden">
+                        <v-col cols="12" md="6" class="hidden-sm-and-down brand-banner relative d-flex flex-column justify-space-between align-center pa-10 overflow-hidden">
                             <div class="banner-overlay"></div>
 
-                            <div class="relative z-10 d-flex align-center">
+                            <div class="relative z-10 d-flex flex-column align-center text-center">
                                 <v-sheet
                                     color="rgba(255,255,255,0.12)"
                                     rounded="lg"
-                                    width="44"
-                                    height="44"
-                                    class="d-flex align-center justify-center ml-3"
+                                    width="52"
+                                    height="52"
+                                    class="d-flex align-center justify-center mb-4"
                                 >
-                                    <v-icon color="white">
+                                    <v-icon color="white" size="28">
                                         mdi-cube-outline
                                     </v-icon>
                                 </v-sheet>
 
-                                <div class="text-right">
-                                    <div class="white--text font-weight-black">
-                                        سامانه مدیریت سازمانی
-                                    </div>
+                                <h3 class="white--text font-weight-black text-subtitle-1 mb-1">
+                                    سامانه مدیریت سازمانی
+                                </h3>
 
-                                    <div class="grey--text text--lighten-2 text-caption mt-1">
-                                        مدیریت هوشمند فرآیندها
-                                    </div>
-                                </div>
+                                <p class="grey--text text--lighten-2 text-caption mb-0">
+                                    مدیریت هوشمند فرآیندها
+                                </p>
                             </div>
 
-                            <div class="relative z-10 text-right brand-content">
-                                <h2 class="white--text text-h4 font-weight-black mb-4 text-shadow-md">
+                            <div class="relative z-10 text-center brand-content">
+                                <h2 class="white--text text-h5 font-weight-black mb-4 text-shadow-md line-height-tight">
                                     امنیت، سرعت و یکپارچگی
                                     <br>
                                     در فرآیندها
                                 </h2>
 
-                                <p class="grey--text text--lighten-3 text-body-2 font-weight-medium mb-6 text-shadow-sm line-height-relaxed">
+                                <p class="grey--text text--lighten-3 text-body-2 font-weight-regular mb-0 text-shadow-sm line-height-relaxed">
                                     پلتفرمی متمرکز برای مدیریت داده‌ها،
                                     گزارش‌گیری پیشرفته و اتوماسیون
                                     فرآیندهای سازمانی.
                                 </p>
+                            </div>
 
-                                <div class="d-flex align-center flex-wrap">
-                                    <div class="brand-feature ml-3">
-                                        <v-icon
-                                            small
-                                            color="white"
-                                            class="ml-1"
-                                        >
-                                            mdi-shield-check-outline
-                                        </v-icon>
+                            <div class="relative z-10 d-flex align-center justify-center flex-wrap">
+                                <div class="brand-feature mx-1">
+                                    <v-icon small color="white" class="ml-1">
+                                        mdi-shield-check-outline
+                                    </v-icon>
+                                    <span>امنیت بالا</span>
+                                </div>
 
-                                        <span>
-                                            امنیت بالا
-                                        </span>
-                                    </div>
+                                <div class="brand-feature mx-1">
+                                    <v-icon small color="white" class="ml-1">
+                                        mdi-speedometer
+                                    </v-icon>
+                                    <span>سرعت بالا</span>
+                                </div>
 
-                                    <div class="brand-feature ml-3">
-                                        <v-icon
-                                            small
-                                            color="white"
-                                            class="ml-1"
-                                        >
-                                            mdi-speedometer
-                                        </v-icon>
-
-                                        <span>
-                                            سرعت بالا
-                                        </span>
-                                    </div>
-
-                                    <div class="brand-feature">
-                                        <v-icon
-                                            small
-                                            color="white"
-                                            class="ml-1"
-                                        >
-                                            mdi-sync
-                                        </v-icon>
-
-                                        <span>
-                                            یکپارچگی
-                                        </span>
-                                    </div>
+                                <div class="brand-feature mx-1">
+                                    <v-icon small color="white" class="ml-1">
+                                        mdi-sync
+                                    </v-icon>
+                                    <span>یکپارچگی</span>
                                 </div>
                             </div>
                         </v-col>
@@ -156,7 +132,9 @@ export default {
     components: {
         LoginForm
     },
+
     layout: 'auth',
+
     data() {
         return {
             loading: false
@@ -168,19 +146,12 @@ export default {
             this.loading = true
 
             try {
-                await this.$store.dispatch(
-                    'auth/login',
-                    credentials
-                )
-
+                await this.$store.dispatch('auth/login', credentials)
                 this.$toast.success('ورود با موفقیت انجام شد')
-
-                const redirectPath = '/news'
-                this.$router.push(redirectPath)
+                this.$router.push('/news')
             } catch (error) {
                 this.$toast.error(
-                    error.message ||
-                    'شماره موبایل یا رمز عبور اشتباه است'
+                    error.message || 'شماره موبایل یا رمز عبور اشتباه است'
                 )
             } finally {
                 this.loading = false
@@ -199,14 +170,11 @@ export default {
 
 .banner-overlay {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     background: linear-gradient(
         180deg,
-        rgba(15, 23, 42, 0.25) 0%,
-        rgba(15, 23, 42, 0.45) 45%,
+        rgba(15, 23, 42, 0.35) 0%,
+        rgba(15, 23, 42, 0.55) 45%,
         rgba(15, 23, 42, 0.95) 100%
     );
     z-index: 1;
@@ -221,23 +189,21 @@ export default {
 }
 
 .brand-content {
-    max-width: 480px;
+    max-width: 380px;
+    width: 100%;
 }
 
 .brand-feature {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    padding: 7px 12px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.08);
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
     font-size: 12px;
     font-weight: 500;
-    margin-bottom: 8px;
-}
-
-.border-t {
-    border-top: 1px solid #f1f5f9;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .text-shadow-md {
@@ -249,6 +215,10 @@ export default {
 }
 
 .line-height-relaxed {
-    line-height: 1.8;
+    line-height: 1.9;
+}
+
+.line-height-tight {
+    line-height: 1.5;
 }
 </style>

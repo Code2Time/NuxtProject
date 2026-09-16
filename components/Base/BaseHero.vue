@@ -34,7 +34,7 @@
                         }}
                     </v-icon>
 
-                    <span class="badge-text font-weight-bold text-caption">
+                    <span class="badge-text font-weight-bold">
                         {{
                             badgeText ||
                             (
@@ -68,19 +68,31 @@
                     }}
                 </p>
 
-                <div v-if="type === 'products'"
-                    class="search-box-container position-relative">
-                    <v-text-field
-                        :value="value"
-                        placeholder="جستجو در بین خدمات و محصولات..."
-                        hide-details
-                        solo
-                        flat
-                        clearable
-                        prepend-inner-icon="mdi-magnify"
-                        class="bright-search-input rounded-xl"
-                        @input="$emit('input', $event)"
-                    />
+                <div v-if="type === 'products'" class="search-box-container position-relative">
+                    <div class="d-flex align-center">
+                        <v-text-field
+                            :value="value"
+                            placeholder="جستجو در بین خدمات و محصولات..."
+                            hide-details
+                            solo
+                            flat
+                            clearable
+                            class="bright-search-input rounded-xl"
+                            @input="$emit('input', $event)"
+                        />
+
+                        <BaseButton
+                            color="#3b82f6"
+                            :x-large="false"
+                            :block="false"
+                            :depressed="false"
+                            :elevation="0"
+                            class="search-btn"
+                            @click="$emit('search')"
+                        >
+                            <v-icon small>mdi-magnify</v-icon>
+                        </BaseButton>
+                    </div>
                 </div>
             </v-col>
         </v-row>
@@ -97,22 +109,18 @@ export default {
             default: 'products',
             validator: val => ['products', 'news'].includes(val)
         },
-
         value: {
             type: String,
             default: ''
         },
-
         title: {
             type: String,
             default: ''
         },
-
         subtitle: {
             type: String,
             default: ''
         },
-
         badgeText: {
             type: String,
             default: ''
@@ -178,5 +186,16 @@ export default {
 
 .max-w-600 {
     max-width: 600px;
+}
+
+.search-btn {
+    border-radius: 12px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    margin-right: 8px !important;
+}
+
+.search-btn:hover {
+    transform: translateY(-1px);
 }
 </style>

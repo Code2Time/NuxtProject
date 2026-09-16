@@ -1,10 +1,3 @@
-const toEnglishDigits = (str) => {
-    return String(str || '').replace(
-        /[۰-۹]/g,
-        (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)
-    )
-}
-
 export const state = () => ({
     token: null,
     user: null
@@ -42,7 +35,7 @@ export const actions = {
 
     login({ commit }, credentials) {
         return new Promise((resolve, reject) => {
-              const inputPhone = toEnglishDigits(credentials.phone).trim()
+              const inputPhone = (credentials.phone).trim()
               const inputPassword = String(credentials.password).trim()
               const isValidPhone = inputPhone === '09111111111'
               const isValidPassword = inputPassword === '12345678'
