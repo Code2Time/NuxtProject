@@ -302,23 +302,14 @@ export default {
             const isLoggedIn = this.$store.getters['auth/isAuthenticated']
 
             if (!isLoggedIn) {
-                if (this.$toast) {
-                    this.$toast.error(
-                        'برای مشاهده پروفایل ابتدا باید وارد شوید'
-                    )
-                }
-
+                    this.$toast.error('برای مشاهده پروفایل ابتدا باید وارد شوید')
                 this.$router.push('/login?redirect=/profile')
             }
         },
 
         async handleLogout() {
             await this.$store.dispatch('auth/logout')
-
-            if (this.$toast) {
-                this.$toast.info('از حساب کاربری خارج شدید')
-            }
-
+            this.$toast.info('از حساب کاربری خارج شدید')
             this.$router.push('/login')
         }
     }

@@ -78,10 +78,10 @@
                                                 color="transparent"
                                                 elevation="0"
                                                 :block="false"
-                                                c-class="pa-0 min-w-0 "
+                                                c-class="pa-0 min-w-0"
                                                 @click="updateQty(getItemKey(item), (item.quantity || item.qty || 1) - 1)"
                                             >
-                                                <v-icon small>mdi-minus</v-icon>
+                                                <v-icon small color="#475569">mdi-minus</v-icon>
                                             </BaseButton>
 
                                             <span class="mx-3 font-weight-bold grey--text text--darken-3">
@@ -95,7 +95,7 @@
                                                 c-class="pa-0 min-w-0"
                                                 @click="updateQty(getItemKey(item), (item.quantity || item.qty || 1) + 1)"
                                             >
-                                                <v-icon small>mdi-plus</v-icon>
+                                                <v-icon small color="#475569">mdi-plus</v-icon>
                                             </BaseButton>
                                         </div>
 
@@ -107,10 +107,10 @@
                                             color="transparent"
                                             elevation="0"
                                             :block="false"
-                                            c-class="pa-0 min-w-0 error--text"
+                                            c-class="pa-0 min-w-0"
                                             @click="removeItem(getItemKey(item))"
                                         >
-                                            <v-icon small>mdi-trash-can-outline</v-icon>
+                                            <v-icon small color="#EF4444">mdi-trash-can-outline</v-icon>
                                         </BaseButton>
                                     </div>
                                 </v-card>
@@ -207,10 +207,7 @@ export default {
 
         removeItem(id) {
             this.removeFromCart(id)
-
-            if (this.$toast) {
-                this.$toast.info('محصول از سبد خرید حذف شد')
-            }
+            this.$toast.info('محصول از سبد خرید حذف شد')
         },
 
         updateQty(productId, quantity) {
@@ -220,9 +217,7 @@ export default {
         },
 
         checkout() {
-            if (this.$toast) {
-                this.$toast.success('در حال انتقال به درگاه پرداخت...')
-            }
+            this.$toast.success('در حال انتقال به درگاه پرداخت...')
         }
     }
 }
