@@ -13,7 +13,7 @@
                 append-icon="mdi-cellphone"
                 rules="required,phone"
                 :dark="false"
-                c-class="light-input-field"
+                variant="light"
             />
         </div>
 
@@ -37,7 +37,7 @@
                 rules="required"
                 :dark="false"
                 :show-password-toggle="true"
-                c-class="light-input-field"
+                variant="light"
             />
         </div>
 
@@ -57,13 +57,8 @@
 </template>
 
 <script>
-import BaseInput from '~/components/Base/BaseInput.vue'
-
 export default {
     name: 'LoginForm',
-    components: {
-        BaseInput
-    },
     props: {
         loading: {
             type: Boolean,
@@ -95,28 +90,6 @@ export default {
 
 .hover-blue:hover {
     color: #2563eb !important;
-}
-
-::v-deep .light-input-field .v-input__slot {
-    background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
-    box-shadow: none !important;
-    border-radius: 10px !important;
-}
-
-::v-deep .light-input-field.v-input--is-focused .v-input__slot {
-    border-color: #0f172a !important;
-    background: #ffffff !important;
-}
-
-::v-deep .light-input-field input {
-    color: #0f172a !important;
-    font-size: 0.95rem !important;
-    font-weight: 600 !important;
-}
-
-::v-deep .light-input-field .v-icon {
-    color: #64748b !important;
 }
 
 .corporate-btn-primary {

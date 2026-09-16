@@ -69,29 +69,29 @@
                 </p>
 
                 <div v-if="type === 'products'" class="search-box-container position-relative">
-                    <div class="d-flex align-center">
-                        <v-text-field
-                            :value="value"
-                            placeholder="جستجو در بین خدمات و محصولات..."
-                            hide-details
-                            solo
-                            flat
-                            clearable
-                            class="bright-search-input rounded-xl"
-                            @input="$emit('input', $event)"
-                        />
-
+                    <div class="d-flex align-center search-row">
                         <BaseButton
                             color="#3b82f6"
                             :x-large="false"
                             :block="false"
                             :depressed="false"
                             :elevation="0"
-                            class="search-btn"
+                            c-class="search-btn"
                             @click="$emit('search')"
                         >
                             <v-icon small>mdi-magnify</v-icon>
                         </BaseButton>
+
+                        <BaseInput
+                            :value="value"
+                            placeholder="جستجو..."
+                            dir="rtl"
+                            variant="light"
+                            clearable
+                            :no-focus-style="true"
+                            c-class="search-input"
+                            @input="$emit('input', $event)"
+                        />
                     </div>
                 </div>
             </v-col>
@@ -188,14 +188,33 @@ export default {
     max-width: 600px;
 }
 
+.search-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    direction: ltr;
+}
+
 .search-btn {
     border-radius: 12px !important;
     height: 48px !important;
     min-width: 48px !important;
-    margin-right: 8px !important;
+    margin: 0 !important;
+    flex-shrink: 0;
+    align-self: center;
 }
 
 .search-btn:hover {
     transform: translateY(-1px);
+}
+
+.search-box-container ::v-deep .search-input {
+    flex: 1;
+    min-width: 0;
+    align-self: center;
+}
+
+.search-box-container ::v-deep .search-input .v-text-field__details {
+    display: none !important;
 }
 </style>

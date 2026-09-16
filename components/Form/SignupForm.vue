@@ -27,10 +27,6 @@
             c-class="mb-2"
             rules="required, min8"
         />
-
-        <!-- <BaseAlert :message="error" type="error" class="mb-4" />
-        <BaseAlert :message="success" type="success" class="mb-4" /> -->
-
         <BaseButton
             :loading="loading"
             :disabled="!valid"
@@ -43,14 +39,8 @@
 </template>
 
 <script>
-import BaseInput from '~/components/Base/BaseInput.vue';
-
 export default {
     name: 'SignupForm',
-    components: {
-        BaseInput,
-    },
-
     props: {
         loading: { 
             type: Boolean, 

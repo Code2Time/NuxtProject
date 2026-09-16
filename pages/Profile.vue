@@ -299,9 +299,9 @@ export default {
 
     methods: {
         checkAuthStatus() {
-            const isLoggedIn = this.$store.getters['auth/isAuthenticated']
+            const is_logged_in = this.$store.getters['auth/isAuthenticated']
 
-            if (!isLoggedIn) {
+            if (!is_logged_in) {
                 this.$toast.error('برای مشاهده پروفایل ابتدا باید وارد شوید')
                 this.$router.push('/login?redirect=/profile')
             }

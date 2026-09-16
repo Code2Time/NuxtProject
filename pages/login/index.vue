@@ -29,7 +29,7 @@
                                         خوش آمدید
                                     </h1>
 
-                                    <p class="text-caption blue-grey--text text--lighten-1 font-weight-medium mb-0">
+                                    <p class="grey--text text--darken-2 font-weight-medium-6 mb-0">
                                         اطلاعات حساب کاربری خود را وارد کنید.
                                     </p>
                                 </div>
@@ -40,13 +40,13 @@
                             <div class="mt-8 text-center">
                                 <v-divider class="mb-5"></v-divider>
 
-                                <p class="text-caption blue-grey--text text--lighten-1 mb-3">
+                                <p class="grey--text text--darken-2 mb-3">
                                     نیاز به راهنمایی دارید؟
                                 </p>
 
                                 <a
                                     href="#"
-                                    class="text-caption font-weight-bold primary--text text-decoration-none"
+                                    class="font-weight-bold blue--text text-darken-2 text-decoration-none"
                                     @click.prevent="$toast.info('لطفاً با پشتیبانی سیستم تماس بگیرید')"
                                 >
                                     تماس با پشتیبانی فنی

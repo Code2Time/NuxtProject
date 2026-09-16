@@ -2,17 +2,17 @@ import Vue from 'vue'
 import Toast, { POSITION } from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 
-const CustomTransition = {
+const custom_transition = {
     functional: true,
     render(h, context) {
         return h(
-           'transition-group',
+            'transition-group',
             {
                 props: {
-                tag: 'div',
-                moveClass: 'Vue-Toastification__bounce-move',
-                enterActiveClass: 'Vue-Toastification__bounce-enter-active',
-                leaveActiveClass: 'Vue-Toastification__bounce-leave-active'
+                    tag: 'div',
+                    moveClass: 'Vue-Toastification__bounce-move',        // 👈 property کتابخونه
+                    enterActiveClass: 'Vue-Toastification__bounce-enter-active',  // 👈
+                    leaveActiveClass: 'Vue-Toastification__bounce-leave-active'   // 👈
                 }
             },
             context.children
@@ -26,7 +26,7 @@ Vue.use(Toast, {
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    transition: CustomTransition,
+    transition: custom_transition,
     maxToasts: 5,
     newestOnTop: true
 })

@@ -1,48 +1,56 @@
 <template>
-    <v-text-field
-        :dir="dir"
-        :value="value"
-        :type="computedType"
-        :label="label"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :readonly="readonly"
-        :clearable="clearable"
-        :counter="counter"
-        :maxlength="maxlength"
-        :loading="loading"
-        :error="error"
-        :error-messages="errorMessages"
-        :success="success"
-        :success-messages="successMessages"
-        :append-icon="appendIcon"
-        :append-outer-icon="appendOuterIcon"
-        :prepend-icon="prependIcon"
-        :prepend-inner-icon="computedPrependInnerIcon"
-        :autofocus="autofocus"
-        :outlined="outlined"
-        :filled="filled"
-        :dense="dense"
-        :shaped="shaped"
-        :solo="solo"
-        :rules="computedRules"
-        :rounded="rounded"
-        :flat="flat"
-        :dark="dark"
-        :class="['glass-input', cClass]"
-        v-on="inputListeners"
-        @click:prepend-inner="handlePrependInnerClick"
-    />
+    <div :dir="dir" :class="[variant === 'light' ? 'light-input' : 'glass-input', { 'no-focus-style': noFocusStyle }, cClass]">
+        <v-text-field
+            :hide-details="hideDetails"
+            :value="value"
+            :type="computedType"
+            :label="label"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            :readonly="readonly"
+            :clearable="clearable"
+            :counter="counter"
+            :maxlength="maxlength"
+            :loading="loading"
+            :error="error"
+            :error-messages="errorMessages"
+            :success="success"
+            :success-messages="successMessages"
+            :append-icon="appendIcon"
+            :append-outer-icon="appendOuterIcon"
+            :prepend-icon="prependIcon"
+            :prepend-inner-icon="computedPrependInnerIcon"
+            :autofocus="autofocus"
+            :outlined="outlined"
+            :filled="filled"
+            :dense="dense"
+            :shaped="shaped"
+            :solo="solo"
+            :rules="computedRules"
+            :rounded="rounded"
+            :flat="flat"
+            :dark="dark"
+            @input="$emit('input', $event)"
+            @click:prepend-inner="handlePrependInnerClick"
+        />
+    </div>
 </template>
 
 <script>
 export default {
     name: 'BaseInput',
-    inheritAttrs: false,
     props: {
         dir: {
             type: String,
             default: 'rtl'
+        },
+        noFocusStyle: {
+            type: Boolean,
+            default: false
+        },
+        hideDetails: {
+            type: Boolean,
+            default: false
         },
         value: {
             type: [String, Number],
@@ -167,6 +175,11 @@ export default {
         cClass: {
             type: [String, Array, Object],
             default: ''
+        },
+        variant: {
+            type: String,
+            default: 'glass',
+            validator: (v) => ['glass', 'light'].includes(v)
         }
     },
 
@@ -193,15 +206,6 @@ export default {
             return this.prependInnerIcon
         },
 
-        inputListeners() {
-            return {
-                ...this.$listeners,
-                input: event => {
-                    this.$emit('input', event)
-                }
-            }
-        },
-
         computedRules() {
             return this.$parseRules(this.rules)
         }
@@ -219,66 +223,115 @@ export default {
 </script>
 
 <style scoped>
+.glass-input ::v-deep .v-input {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 .glass-input ::v-deep .v-input__slot {
     background: rgba(30, 41, 59, 0.7) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     backdrop-filter: blur(10px);
     border-radius: 10px !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    padding: 0 16px !important;
     transition: all 0.2s ease;
-}
-
-.glass-input.v-input--is-focused ::v-deep .v-input__slot {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3) !important;
-    background: rgba(30, 41, 59, 0.9) !important;
 }
 
 .glass-input ::v-deep input {
     color: #ffffff !important;
     font-size: 1rem !important;
     font-weight: 500 !important;
-    direction: inherit;
-    text-align: inherit;
+    padding: 0 !important;
+    height: 100% !important;
+}
+
+.glass-input ::v-deep input::placeholder {
+    color: #64748b !important;
 }
 
 .glass-input ::v-deep .v-label {
     color: #94a3b8 !important;
-    right: 12px !important;
-    left: auto !important;
-}
-
-.glass-input.v-input--is-focused ::v-deep .v-label {
-    color: #60a5fa !important;
 }
 
 .glass-input ::v-deep .v-icon {
     color: #94a3b8 !important;
 }
 
-.glass-input.v-input--is-focused ::v-deep .v-icon {
+.light-input ::v-deep .v-input {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.light-input ::v-deep .v-input__slot {
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 10px !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    padding: 0 16px !important;
+    transition: all 0.2s ease;
+}
+
+.light-input ::v-deep input {
+    color: #1e293b !important;
+    padding: 0 !important;
+    height: 100% !important;
+}
+
+.light-input ::v-deep input::placeholder {
+    color: #94a3b8 !important;
+    opacity: 1 !important;
+}
+
+.light-input ::v-deep .v-label {
+    color: #64748b !important;
+}
+
+.light-input ::v-deep .v-icon {
+    color: #64748b !important;
+}
+
+.glass-input:not(.no-focus-style) ::v-deep .v-input--is-focused .v-input__slot {
+    border-color: #3b82f6 !important;
+    border-width: 2px !important;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25) !important;
+    background: rgba(30, 41, 59, 0.95) !important;
+}
+
+.glass-input:not(.no-focus-style).v-input--is-focused ::v-deep .v-icon {
     color: #60a5fa !important;
 }
 
-.glass-input ::v-deep .v-input__append-inner {
-    margin-left: 0 !important;
-    margin-right: 12px !important;
+.glass-input:not(.no-focus-style).v-input--is-focused ::v-deep .v-label {
+    color: #60a5fa !important;
 }
 
-.glass-input ::v-deep .v-input__prepend-inner {
-    margin-right: 0 !important;
-    margin-left: 12px !important;
+.light-input:not(.no-focus-style) ::v-deep .v-input--is-focused .v-input__slot {
+    border-color: #3b82f6 !important;
+    border-width: 2px !important;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15) !important;
+    background: #ffffff !important;
 }
 
-.glass-input ::v-deep input::placeholder {
-    color: #64748b !important;
-    direction: inherit;
-    text-align: inherit;
+.light-input:not(.no-focus-style).v-input--is-focused ::v-deep .v-label {
+    color: #3b82f6 !important;
 }
 
-.glass-input ::v-deep .v-text-field__details,
-.glass-input ::v-deep .v-messages,
-.glass-input ::v-deep .v-messages__message {
+.light-input:not(.no-focus-style).v-input--is-focused ::v-deep .v-icon {
+    color: #3b82f6 !important;
+}
+
+[dir="rtl"] ::v-deep input,
+[dir="rtl"] ::v-deep input::placeholder {
     direction: rtl !important;
     text-align: right !important;
+}
+
+[dir="ltr"] ::v-deep input,
+[dir="ltr"] ::v-deep input::placeholder {
+    direction: ltr !important;
+    text-align: left !important;
 }
 </style>

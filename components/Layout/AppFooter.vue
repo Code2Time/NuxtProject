@@ -4,7 +4,7 @@
             <v-container class="py-0">
                 <div class="d-flex flex-column flex-md-row align-center justify-space-between text-caption white--text rtl-dir">
                     <div class="mb-2 mb-md-0 font-weight-medium">
-                        تمامی حقوق این سیستم محفوظ است © {{ currentYear }}
+                        تمامی حقوق این سیستم محفوظ است © {{ current_year }}
                     </div>
 
                     <div class="d-flex align-center">
@@ -30,7 +30,7 @@ export default {
 
     data() {
         return {
-            currentYear: new Date().getFullYear()
+            current_year: new Date().getFullYear()
         }
     }
 }

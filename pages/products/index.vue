@@ -1,7 +1,7 @@
 <template>
     <div class="light-admin-page">
         <v-container fluid class="max-width-container py-8 px-4 px-md-8">
-            <BaseHero type="products" v-model="searchQuery" @search="handleSearch" />
+            <BaseHero type="products" v-model="search_query" @search="handleSearch" />
 
             <ProductStats :stats="stats" />
 
@@ -11,13 +11,13 @@
                     <h2 class="text-h5 font-weight-bold grey--text text--darken-4">لیست خدمات و محصولات</h2>
                 </div>
                 <span class="text-caption font-weight-bold grey--text text--darken-2">
-                    تعداد موارد: {{ productList.length }}
+                    تعداد موارد: {{ product_list.length }}
                 </span>
             </div>
 
             <v-row align="stretch" class="mx-0">
                 <v-col
-                    v-for="(product, index) in productList"
+                    v-for="(product, index) in product_list"
                     :key="product.id || index"
                     cols="12"
                     sm="6"
@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import BaseHero from '~/components/Base/BaseHero.vue'
 import ProductStats from '~/components/Products/ProductStats.vue'
 import ProductCard from '~/components/Products/ProductCard.vue'
 
@@ -40,43 +39,42 @@ export default {
     name: 'ProductsIndexPage',
 
     components: {
-        BaseHero,
         ProductStats,
         ProductCard
     },
 
     asyncData() {
         try {
-            const jsonData = require('~/static/data/products.json')
-            const products = jsonData.products || jsonData || []
-            const stats = jsonData.stats || []
+            const json_data = require('~/static/data/products.json')
+            const products = json_data.products || json_data || []
+            const stats = json_data.stats || []
             return { 
-                allProducts: products, 
-                productList: products,
+                all_products: products, 
+                product_list: products,
                 stats
             }
         } catch (err) {
             console.error('Error loading products.json:', err)
-            return { allProducts: [], productList: [], stats: [] }
+            return { all_products: [], product_list: [], stats: [] }
         }
     },
 
     data() {
         return {
-            searchQuery: ''
+            search_query: ''
         }
     },
 
     methods: {
         handleSearch() {
-            const query = (this.searchQuery || '').trim().toLowerCase()
+            const query = (this.search_query || '').trim().toLowerCase()
             
             if (!query) {
-                this.productList = this.allProducts
+                this.product_list = this.all_products
                 return
             }
             
-            this.productList = this.allProducts.filter(p => {
+            this.product_list = this.all_products.filter(p => {
                 const name = (p.name).toLowerCase()                
                 return name.includes(query)
             })

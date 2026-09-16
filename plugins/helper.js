@@ -3,16 +3,16 @@ function parseNumericPrice(value) {
         return 0
     }
 
-    const englishValue = String(value)
-    const persianDigits = '۰۱۲۳۴۵۶۷۸۹'
-    const arabicDigits = '٠١٢٣٤٥٦٧٨٩'
-    const converted = englishValue
-        .replace(/[۰-۹]/g, (d) => persianDigits.indexOf(d))
-        .replace(/[٠-٩]/g, (d) => arabicDigits.indexOf(d))
+    const english_value = String(value)
+    const persian_digits = '۰۱۲۳۴۵۶۷۸۹'
+    const arabic_digits = '٠١٢٣٤٥٦٧٨٩'
+    const converted = english_value
+        .replace(/[۰-۹]/g, (d) => persian_digits.indexOf(d))
+        .replace(/[٠-٩]/g, (d) => arabic_digits.indexOf(d))
 
-    const onlyDigits = converted.replace(/[^0-9]/g, '')
+    const only_digits = converted.replace(/[^0-9]/g, '')
 
-    return parseInt(onlyDigits, 10) || 0
+    return parseInt(only_digits, 10) || 0
 }
 
 

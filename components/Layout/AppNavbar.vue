@@ -140,7 +140,7 @@
                                 :block="false"
                                 :x-large="false"
                                 :rounded="false"
-                                c-class="mx-1 rounded-lg caption d-none d-md-flex"
+                                c-class="mx-1 rounded-lg d-none d-md-flex"
                             >
                                 <v-icon right size="18" class="ml-1">mdi-account-cog-outline</v-icon>
                                 پروفایل کاربری
@@ -152,14 +152,14 @@
                                 :block="false"
                                 :x-large="false"
                                 :rounded="false"
-                                c-class="mx-1 rounded-lg caption"
+                                c-class="mx-1 rounded-lg"
                                 @click="handleLogout"
                             >
                                 <v-icon right size="18" class="ml-1">mdi-logout</v-icon>
                                 خروج
                             </BaseButton>
                         </template>
-
+    
                         <template v-else>
                             <BaseButton
                                 color="#3B82F6"

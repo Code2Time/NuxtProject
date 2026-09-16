@@ -158,15 +158,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import BaseRequireLogin from '~/components/Base/BaseRequireLogin.vue'
 
 export default {
     name: 'CartPage',
-
-    components: {
-        BaseRequireLogin
-    },
-
     computed: {
         ...mapGetters(['cartItems', 'cartTotalCount', 'cartTotalPrice']),
 
@@ -189,7 +183,7 @@ export default {
         },
 
         getItemTotalPrice(item) {
-            const rawPrice = item.price
+            const raw_price = item.price
                 ?? item.unitPrice
                 ?? item.unit_price
                 ?? item.totalPrice
@@ -201,8 +195,8 @@ export default {
                 ?? 0
 
             const qty = Number(item.quantity || item.qty || 1)
-            const numericPrice = this.$helper.parseNumericPrice(rawPrice)
-            return this.$helper.formatPrice(numericPrice * qty)
+            const numeric_price = this.$helper.parseNumericPrice(raw_price)
+            return this.$helper.formatPrice(numeric_price * qty)
         },
 
         removeItem(id) {
@@ -210,10 +204,13 @@ export default {
             this.$toast.info('محصول از سبد خرید حذف شد')
         },
 
-        updateQty(productId, quantity) {
-            if (quantity > 0) {
-                this.updateQuantity({ productId, quantity })
+        updateQty(product_id, quantity) {
+            if (quantity <= 0) {
+                this.removeFromCart(product_id)
+                this.$toast.info('محصول از سبد خرید حذف شد')
+                return
             }
+            this.updateQuantity({ product_id, quantity })
         },
 
         checkout() {

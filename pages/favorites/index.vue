@@ -70,14 +70,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import ProductCard from '~/components/Products/ProductCard.vue'
-import BaseRequireLogin from '~/components/Base/BaseRequireLogin.vue'   
 
 export default {
 name: 'FavoritesPage',
 
     components: {
         ProductCard,
-        BaseRequireLogin
     },
 
     computed: {

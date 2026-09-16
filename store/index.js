@@ -1,23 +1,23 @@
 function parseNumericPrice(value) {
     if (value === null || value === undefined) return 0
-    const strValue = String(value)
+    const str_value = String(value)
         .replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
         .replace(/[0-9]/g, (d) => '0123456789'.indexOf(d))
         .replace(/[^0-9]/g, '')
-    return parseInt(strValue, 10) || 0
+    return parseInt(str_value, 10) || 0
 }
 
 function saveCartToLocalStorage(state, rootState) {
     if (process.client) {
-        const userPhone = rootState.auth?.user?.phone || 'guest_user'
-        localStorage.setItem(`cart_${userPhone}`, JSON.stringify(state.cart))
+        const user_phone = rootState.auth?.user?.phone || 'guest_user'
+        localStorage.setItem(`cart_${user_phone}`, JSON.stringify(state.cart))
     }
 }
 
 function saveFavoritesToLocalStorage(state, rootState) {
     if (process.client) {
-        const userPhone = rootState.auth?.user?.phone || 'guest_user'
-        localStorage.setItem(`favorites_${userPhone}`, JSON.stringify(state.favorites))
+        const user_phone = rootState.auth?.user?.phone || 'guest_user'
+        localStorage.setItem(`favorites_${user_phone}`, JSON.stringify(state.favorites))
     }
 }
 
@@ -31,48 +31,48 @@ export const getters = {
     cartTotalCount: (state) => state.cart.reduce((total, item) => total + (item.quantity || 1), 0),
     cartTotalPrice: (state) => {
         return state.cart.reduce((total, item) => {
-            const rawPrice = item.price ?? item.unitPrice ?? item.unit_price ?? item.totalPrice ?? item.amount ?? item.product?.price ?? 0
-            const numericPrice = parseNumericPrice(rawPrice)
-            return total + numericPrice * (item.quantity || 1)
+            const raw_price = item.price ?? item.unitPrice ?? item.unit_price ?? item.totalPrice ?? item.amount ?? item.product?.price ?? 0
+            const numeric_price = parseNumericPrice(raw_price)
+            return total + numeric_price * (item.quantity || 1)
         }, 0)
     },
 
     favoriteItems: (state) => state.favorites,
     favoritesCount: (state) => state.favorites.length,
-    isFavorite: (state) => (productId) => {
-        return state.favorites.some((item) => (item.id || item.productId || item._id) === productId)
+    isFavorite: (state) => (product_id) => {
+        return state.favorites.some((item) => (item.id || item.productId || item._id) === product_id)
     }
 }
 
 export const mutations = {
     ADD_TO_CART(state, product) {
-        const itemKey = product.id || product.productId || product.product_id || product._id
-        const existingItem = state.cart.find((item) => (item.id || item.productId || item.product_id || item._id) === itemKey)
-        if (existingItem) {
-            existingItem.quantity = (existingItem.quantity || 1) + 1
+        const item_key = product.id || product.productId || product.product_id || product._id
+        const existing_item = state.cart.find((item) => (item.id || item.productId || item.product_id || item._id) === item_key)
+        if (existing_item) {
+            existing_item.quantity = (existing_item.quantity || 1) + 1
         } else {
             state.cart.push({ ...product, quantity: product.quantity || 1 })
         }
     },
 
-    REMOVE_FROM_CART(state, productId) {
-        state.cart = state.cart.filter((item) => (item.id || item.productId || item.product_id || item._id) !== productId)
+    REMOVE_FROM_CART(state, product_id) {
+        state.cart = state.cart.filter((item) => (item.id || item.productId || item.product_id || item._id) !== product_id)
     },
 
-    UPDATE_QUANTITY(state, { productId, quantity }) {
-        const item = state.cart.find((i) => (i.id || i.productId || i.product_id || i._id) === productId)
+    UPDATE_QUANTITY(state, { product_id, quantity }) {
+        const item = state.cart.find((i) => (i.id || i.productId || i.product_id || i._id) === product_id)
         if (item && quantity > 0) {
             item.quantity = quantity
         }
     },
 
-    SET_CART(state, cartData) {
-        state.cart = cartData || []
+    SET_CART(state, cart_data) {
+        state.cart = cart_data || []
     },
 
     TOGGLE_FAVORITE(state, product) {
-        const prodId = product.id || product.productId || product._id
-        const index = state.favorites.findIndex((item) => (item.id || item.productId || item._id) === prodId)
+        const prod_id = product.id || product.productId || product._id
+        const index = state.favorites.findIndex((item) => (item.id || item.productId || item._id) === prod_id)
         if (index > -1) {
             state.favorites.splice(index, 1)
         } else {
@@ -80,12 +80,12 @@ export const mutations = {
         }
     },
 
-    REMOVE_FROM_FAVORITES(state, productId) {
-        state.favorites = state.favorites.filter((item) => (item.id || item.productId || item._id) !== productId)
+    REMOVE_FROM_FAVORITES(state, product_id) {
+        state.favorites = state.favorites.filter((item) => (item.id || item.productId || item._id) !== product_id)
     },
 
-    SET_FAVORITES(state, favoritesData) {
-        state.favorites = favoritesData || []
+    SET_FAVORITES(state, favorites_data) {
+        state.favorites = favorites_data || []
     }
 }
 
@@ -96,8 +96,8 @@ export const actions = {
         return true
     },
 
-    removeFromCart({ commit, state, rootState }, productId) {
-        commit('REMOVE_FROM_CART', productId)
+    removeFromCart({ commit, state, rootState }, product_id) {
+        commit('REMOVE_FROM_CART', product_id)
         saveCartToLocalStorage(state, rootState)
     },
 
@@ -108,11 +108,11 @@ export const actions = {
 
     loadUserCart({ commit, rootState }) {
         if (process.client) {
-            const userPhone = rootState.auth?.user?.phone || 'guest_user'
-            const savedCart = localStorage.getItem(`cart_${userPhone}`)
-            if (savedCart) {
+            const user_phone = rootState.auth?.user?.phone || 'guest_user'
+            const saved_cart = localStorage.getItem(`cart_${user_phone}`)
+            if (saved_cart) {
                 try {
-                    commit('SET_CART', JSON.parse(savedCart))
+                    commit('SET_CART', JSON.parse(saved_cart))
                 } catch (e) {
                     console.error('Error loading cart from localStorage', e)
                     commit('SET_CART', [])
@@ -128,25 +128,25 @@ export const actions = {
         saveFavoritesToLocalStorage(state, rootState)
     },
 
-    removeFromFavorites({ commit, state, rootState }, productId) {
-        commit('REMOVE_FROM_FAVORITES', productId)
+    removeFromFavorites({ commit, state, rootState }, product_id) {
+        commit('REMOVE_FROM_FAVORITES', product_id)
         saveFavoritesToLocalStorage(state, rootState)
     },
 
     loadUserFavorites({ commit, rootState }) {
         if (process.client) {
-          const userPhone = rootState.auth?.user?.phone || 'guest_user'
-          const savedFavorites = localStorage.getItem(`favorites_${userPhone}`)
-          if (savedFavorites) {
-              try {
-                  commit('SET_FAVORITES', JSON.parse(savedFavorites))
-              } catch (e) {
-                  console.error('Error loading favorites from localStorage', e)
-                  commit('SET_FAVORITES', [])
-              }
-          } else {
-              commit('SET_FAVORITES', [])
-          }
+            const user_phone = rootState.auth?.user?.phone || 'guest_user'
+            const saved_favorites = localStorage.getItem(`favorites_${user_phone}`)
+            if (saved_favorites) {
+                try {
+                    commit('SET_FAVORITES', JSON.parse(saved_favorites))
+                } catch (e) {
+                    console.error('Error loading favorites from localStorage', e)
+                    commit('SET_FAVORITES', [])
+                }
+            } else {
+                commit('SET_FAVORITES', [])
+            }
         }
     }
 }

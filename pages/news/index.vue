@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import BaseHero from '~/components/Base/BaseHero.vue'
 import NewsCard from '~/components/News/NewsCard.vue'
 import newsData from '~/static/data/news.json'
 
@@ -38,7 +37,6 @@ export default {
     name: 'NewsPage',
 
     components: {
-        BaseHero,
         NewsCard
     },
 

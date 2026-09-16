@@ -94,6 +94,11 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'ProductDetailPage',
+    data() {
+        return {
+            product: null
+        }
+    },
     asyncData({ params, error }) {
         try {
             const data = require('~/static/data/products.json')
@@ -148,9 +153,9 @@ export default {
         handleToggleFav() {
             if (!this.product) return
 
-            const wasFav = this.isFav
+            const was_favorite = this.isFav
             this.toggleFavorite(this.product)
-            const message = !wasFav
+            const message = !was_favorite
                 ? 'محصول به علاقه‌مندی‌ها اضافه شد'
                 : 'محصول از علاقه‌مندی‌ها حذف شد'
 

@@ -13,9 +13,9 @@
                         بازگشت به لیست اخبار
                     </BaseButton>
 
-                    <v-card v-if="newsItem" class="white-detail-card rounded-2xl overflow-hidden elevation-2">
+                    <v-card v-if="news_item" class="white-detail-card rounded-2xl overflow-hidden elevation-2">
                         <v-img
-                            :src="newsItem.image || 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop'"
+                            :src="news_item.image || 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop'"
                             height="300"
                             cover
                             alt="تصویر خبر"
@@ -30,25 +30,25 @@
                         <div class="pa-6 pa-md-8">
                             <div class="d-flex align-center justify-space-between mb-4 flex-wrap">
                                 <v-chip color="#eff6ff" text-color="#2563eb" label small class="font-weight-bold px-3">
-                                    {{ newsItem.category || 'اطلاعیه' }}
+                                    {{ news_item.category || 'اطلاعیه' }}
                                 </v-chip>
 
                                 <div class="d-flex align-center text-slate text-body-1">
                                     <v-icon small color="#64748b" class="ml-1">mdi-calendar-month-outline</v-icon>
-                                    <span class="ml-4">{{ newsItem.date || '۱۵ شهریور ۱۴۰۳' }}</span>
+                                    <span class="ml-4">{{ news_item.date || '۱۵ شهریور ۱۴۰۳' }}</span>
                                     <v-icon small color="#64748b" class="ml-1">mdi-clock-outline</v-icon>
-                                    <span>{{ newsItem.readTime || '۲ دقیقه مطالعه' }}</span>
+                                    <span>{{ news_item.readTime || '۲ دقیقه مطالعه' }}</span>
                                 </div>
                             </div>
 
                             <h1 class="news-title font-weight-black text-h5 text-md-h4 mb-6">
-                                {{ newsItem.title }}
+                                {{ news_item.title }}
                             </h1>
 
                             <v-divider class="mb-6" />
 
                             <div class="news-content text-body-1 text-justify">
-                                <p>{{ newsItem.excerpt }}</p>
+                                <p>{{ news_item.excerpt }}</p>
                             </div>
 
                             <div class="mt-8 pt-6 border-t d-flex align-center justify-space-between">
@@ -63,25 +63,19 @@
 </template>
 
 <script>
-import BaseButton from '~/components/Base/BaseButton.vue'
-
 export default {
     name: 'NewsDetailPage',
 
-    components: {
-        BaseButton
-    },
-
     asyncData({ params, error }) {
         try {
-            const newsData = require('~/static/data/news.json')
-            const newsItem = newsData.newsList.find((item) => item.id === parseInt(params.id, 10))
+            const news_data = require('~/static/data/news.json')
+            const news_item = news_data.newsList.find((item) => item.id === parseInt(params.id, 10))
 
-            if (!newsItem) {
+            if (!news_item) {
                 return error({ statusCode: 404, message: 'خبر یافت نشد' })
             }
 
-            return { newsItem }
+            return { news_item }
         } catch (e) {
             return error({ statusCode: 500, message: 'خطا در دریافت اطلاعات' })
         }
