@@ -43,9 +43,9 @@
 </template>
 
 <script>
-import BaseAlert from '~/components/base/BaseAlert.vue';
-import BaseButton from '~/components/base/BaseButton.vue';
-import BaseInput from '~/components/base/BaseInput.vue';
+import BaseAlert from '~/components/Base/BaseAlert.vue';
+import BaseButton from '~/components/Base/BaseButton.vue';
+import BaseInput from '~/components/Base/BaseInput.vue';
 
 export default {
     name: 'SignupForm',
